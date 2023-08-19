@@ -7,14 +7,11 @@ var pep = false;
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
-  
+  { path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule) },
+  { path: 'sign-in', loadChildren: () => import('./pages/sign-in/sign-in.module').then(m => m.SignInModule) },
+  { path: 'sign-up', loadChildren: () => import('./pages/sign-up/sign-up.module').then(m => m.SignUpModule) },
   
   { path: '', component: LayoutComponent, children:[
-    { path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule) },
-    
-    { path: 'sign-in', loadChildren: () => import('./pages/sign-in/sign-in.module').then(m => m.SignInModule) },
-    { path: 'sign-up', loadChildren: () => import('./pages/sign-up/sign-up.module').then(m => m.SignUpModule) },
-    
     { path: 'administration', loadChildren: () => import('./pages/administration/administration.module').then(m => m.AdministrationModule)},
     { path: 'store', loadChildren: () => import('./pages/store/store.module').then(m => m.StoreModule) },
     { path: 'members', loadChildren: () => import('./pages/members/members.module').then(m => m.MembersModule) },

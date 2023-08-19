@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModel } from 'src/material.module';
 import { NavbarComponent } from './share/navbar/navbar.component';
 import { LayoutComponent } from './share/layout/layout.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
