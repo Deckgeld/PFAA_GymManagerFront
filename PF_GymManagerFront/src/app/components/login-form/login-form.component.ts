@@ -20,7 +20,7 @@ export class LoginFormComponent {
     password: new FormControl('', Validators.required),
   }
   extraFields = {
-    phone: new FormControl('',  Validators.required)
+    phoneNumber: new FormControl('',  Validators.required)
   }
 
   constructor(
@@ -45,6 +45,11 @@ export class LoginFormComponent {
   }
 
   onSubmitForm(){
-    this.resposeForm.emit(this.formUser);
+    let request = {...this.formUser.value}
+    if(!this.isSingUp){
+      request = {password: this.formUser.value.password, userName: this.formUser.value.email }
+    }
+    debugger;
+    this.resposeForm.emit(request);
   }
 }
