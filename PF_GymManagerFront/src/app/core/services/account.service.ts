@@ -1,8 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';     
-import { ResponseModelLogin, login } from '../interfaces/account';
-import { ResponseModelNewUser, newUser } from '../interfaces/user';
+import { Model, ResponseModel } from '../interfaces/response-model';
+import { newUser } from '../interfaces/user';
+import { login } from '../interfaces/account';
 
 @Injectable({
   providedIn: 'root'
@@ -19,14 +20,15 @@ export class AccountService {
  
    constructor(private http:HttpClient) { }
  
-   SignIn(request: login): Observable<ResponseModelLogin<any>>{
-    console.log("Service") 
+   SignIn(request: login): Observable<ResponseModel<Model>>{
+    console.log("Service" + request) 
     let url: string = `${this.urlBase}api/Account`;   
-     return this.http.post<ResponseModelLogin<any>>(url, request, this.httpOptions);
+     return this.http.post<ResponseModel<Model>>(url, request, this.httpOptions);
    }
    
-   SignUp(request: newUser): Observable<ResponseModelNewUser<any>>{
+   SignUp(request: newUser): Observable<ResponseModel<Model>>{
+    console.log("Service" + request) 
      let url: string = `${this.urlBase}api/Users`;   
-     return this.http.post<ResponseModelNewUser<any>>(url, request, this.httpOptions);
+     return this.http.post<ResponseModel<Model>>(url, request, this.httpOptions);
    }
 }

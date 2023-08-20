@@ -16,7 +16,6 @@ export class SignUpComponent {
     ) {}
 
   resposeForm(response:newUser){
-    console.log('Respuesta desde Sign Up', response)
     this.login.SignUp(response).subscribe(() => this.router.navigate(['/sign-in']));
   }
 }

@@ -9,23 +9,77 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" aria-current="page" [routerLink]="['/home']">Home</a>
-                    </li> -->
+                    <ng-container *ngIf="!hasSession; else withSession">
+                        <li class="nav-item" style="margin-right: 8px;">
+                            <a class="nav-link active" [routerLink]="['/sign-in']">Sign in</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" [routerLink]="['/sign-up']">Sign up</a>
+                        </li>
+                    </ng-container>
+                    <ng-template #withSession>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" [routerLink]="['/home']">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                              aria-expanded="false">
+                              Administration
+                            </a>
+                            <ul class="dropdown-menu">
+                              <li><a class="dropdown-item" [routerLink]="['/administration/equipment-types']">Equipment Types</a></li>
+                              <li><a class="dropdown-item" [routerLink]="['/administration/membership-types']">Membership Types</a>
+                              </li>
+                              <li><a class="dropdown-item" [routerLink]="['/administration/users']">Users</a></li>
+                            </ul>
+                          </li>
+              
+                          <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                              aria-expanded="false">
+                              Store
+                            </a>
+                            <ul class="dropdown-menu">
+                              <li><a class="dropdown-item" [routerLink]="['/store/shopping']">Shopping</a></li>
+                              <li><a class="dropdown-item" [routerLink]="['/store/inventory']">Inventory</a></li>
+                              <li><a class="dropdown-item" [routerLink]="['/store/products']">Products</a></li>
+                            </ul>
+                          </li>
+              
+                          <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                              aria-expanded="false">
+                              Members
+                            </a>
+                            <ul class="dropdown-menu">
+                              <li><a class="dropdown-item" [routerLink]="['/members/clients']">Clients</a></li>
+                              <li><a class="dropdown-item" [routerLink]="['/members/renewalMembership']">Renewal Membership</a></li>
+                              <li><a class="dropdown-item" [routerLink]="['/members/attendance']">Attendance</a></li>
+                            </ul>
+                          </li>
+              
+                          <li class="nav-item">
+                            <a class="nav-link" [routerLink]="['/invoicing']">Invoicing</a>
+                          </li>
+              
+                          <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                              aria-expanded="false">
+                              Reports
+                            </a>
+                            <ul class="dropdown-menu">
+                              <li><a class="dropdown-item" [routerLink]="['/reports/newMembers']">New Members</a></li>
+                              <li><a class="dropdown-item" [routerLink]="['/reports/attendance']">Attendance</a></li>
+                              <li><a class="dropdown-item" [routerLink]="['/reports/renewal']">Renewal</a></li>
+                            </ul>
+                          </li>
 
-                    <li class="nav-item" style="margin-right: 8px;">
-                        <a class="nav-link active" [routerLink]="['/sign-in']">Sign in</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" [routerLink]="['/sign-up']">Sign up</a>
-                    </li>
+                    </ng-template>
                 </ul>
             </div>
         </div>
     </nav>
 </header>
-
-
 
 <div class="image-holder">
     <img src="../../../assets/img/home1.jpg" alt="Imagen"

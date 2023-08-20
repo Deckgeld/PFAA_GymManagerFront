@@ -49,7 +49,6 @@ export class LoginFormComponent {
     if(!this.isSingUp){
       request = {password: this.formUser.value.password, userName: this.formUser.value.email }
     }
-    debugger;
     this.resposeForm.emit(request);
   }
 }
