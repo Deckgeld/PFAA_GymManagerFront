@@ -11,6 +11,14 @@ export interface ResponseArrayModel<Model> {
     requestId: string;
 }
 
+export interface ResponseErrorModel {
+    errors: any;
+    type: string;
+    title: string;
+    status: number;
+    traceId: string;
+}
+
 
 export interface Model {
     id: string,

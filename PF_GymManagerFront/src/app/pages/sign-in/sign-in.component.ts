@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { login } from 'src/app/core/interfaces/account';
-import { Model, ResponseModel } from 'src/app/core/interfaces/response-model';
+import { Model, ResponseModel } from 'src/app/core/interfaces/response-models';
 import { AccountService } from 'src/app/core/services/account.service';
+import { SwalAlertService } from 'src/app/core/services/swal-alert.service';
 import { environment } from 'src/environments/environment.development';
 
 @Component({
@@ -13,15 +14,22 @@ import { environment } from 'src/environments/environment.development';
 export class SignInComponent {
   constructor(
     private login: AccountService,
-    private router: Router
+    private router: Router,
+    private alertS: SwalAlertService
     ) {}
 
-  resposeForm(response:login){
-    this.login.SignIn(response).subscribe((response:ResponseModel<Model>) => {
-      if(response.message === 'Authorized'){
+  resposeForm(formData:login){
+    this.login.SignIn(formData).subscribe((formData:ResponseModel<Model>) => {
+      if (formData.hasError){
+        this.alertS.errorAlert('Credentials error', 'Incorrect username or password, please validate your credentials')
+      }
+      if(formData.message === 'Authorized'){
         environment.hasSession = true;
         this.router.navigate(['/home']);
       }
+    }, (error:any) => { 
+      this.alertS.errorAlert('Sorry ', 'Service not available at the moment, please contact your admin')
+      console.log(error)
     });
 }
 }
