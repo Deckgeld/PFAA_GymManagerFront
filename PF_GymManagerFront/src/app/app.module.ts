@@ -8,6 +8,8 @@ import { MaterialModel } from 'src/material.module';
 import { NavbarComponent } from './share/navbar/navbar.component';
 import { LayoutComponent } from './share/layout/layout.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CookieModule } from 'ngx-cookie';
+import { RouterModule } from '@angular/router'; 
 
 @NgModule({
   declarations: [
@@ -20,9 +22,11 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModel,
-    HttpClientModule
+    HttpClientModule,
+    CookieModule.withOptions(),
+    RouterModule.forRoot([])
   ],
-  providers: [],
+  providers: [Location],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

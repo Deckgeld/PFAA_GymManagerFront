@@ -1,5 +1,7 @@
 <header class="fixed-top">
-  <nav id="menu" class="navbar navbar-expand-lg" data-bs-theme="dark" style="background-color: #ebc53b;">
+    <nav id="menu" [ngClass]="{'bg-transparent': !isScrolled && isHome, 'bg-yellow': isScrolled || !isHome }" class="navbar navbar-expand-lg" data-bs-theme="dark">
+    <!-- <nav id="menu" *ngIf="!isHome" class="navbar navbar-expand-lg" data-bs-theme="dark" style="background-color: #ebc53b;"> -->
+      
     <div class="container-fluid">
       <a class="navbar-brand" [routerLink]="['/home']"><b>Promax</b></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
@@ -8,13 +10,28 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
+
+          <ng-container *ngIf="!hasSession; else withSession">
+            <li class="nav-item" style="margin-right: 8px;">
+              <a class="nav-link active" [routerLink]="['/sign-in']">Sign in</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" [routerLink]="['/sign-up']">Sign up</a>
+            </li>
+          </ng-container>
+
+          <ng-template #withSession>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" [routerLink]="['/home']">Home</a>
+            </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
                 Administration
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" [routerLink]="['/administration/equipment-types']">Equipment Types</a></li>
+                <li><a class="dropdown-item" [routerLink]="['/administration/equipment-types']">Equipment Types</a>
+                </li>
                 <li><a class="dropdown-item" [routerLink]="['/administration/membership-types']">Membership Types</a>
                 </li>
                 <li><a class="dropdown-item" [routerLink]="['/administration/users']">Users</a></li>
@@ -60,6 +77,8 @@
                 <li><a class="dropdown-item" [routerLink]="['/reports/renewal']">Renewal</a></li>
               </ul>
             </li>
+
+          </ng-template>
         </ul>
       </div>
     </div>

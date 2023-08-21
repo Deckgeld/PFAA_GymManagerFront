@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie';
 import { login } from 'src/app/core/interfaces/account';
 import { Model, ResponseModel } from 'src/app/core/interfaces/response-models';
 import { AccountService } from 'src/app/core/services/account.service';
@@ -15,7 +16,8 @@ export class SignInComponent {
   constructor(
     private login: AccountService,
     private router: Router,
-    private alertS: SwalAlertService
+    private alertS: SwalAlertService,
+    private cookie: CookieService
     ) {}
 
   resposeForm(formData:login){
@@ -24,7 +26,10 @@ export class SignInComponent {
         this.alertS.errorAlert('Credentials error', 'Incorrect username or password, please validate your credentials')
       }
       if(formData.message === 'Authorized'){
-        environment.hasSession = true;
+        console.log(formData)
+        const session = { ...formData.model, hasSession: true }    
+        let objTemp = btoa(JSON.stringify(session));
+        this.cookie.put('session', objTemp)
         this.router.navigate(['/home']);
       }
     }, (error:any) => { 

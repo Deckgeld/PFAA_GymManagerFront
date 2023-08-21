@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { CookieService } from 'ngx-cookie';
+
 
 @Component({
   selector: 'app-login-form',
@@ -23,8 +25,11 @@ export class LoginFormComponent {
     phoneNumber: new FormControl('',  Validators.required)
   }
 
+  hasSession: boolean = false;
+
   constructor(
-    private fb:FormBuilder
+    private fb:FormBuilder,
+    private cookie: CookieService
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {

@@ -5,19 +5,19 @@ import { hasSessionGuard } from './core/guards/has-session.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
-  { path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule) },
   { path: 'sign-in', loadChildren: () => import('./pages/sign-in/sign-in.module').then(m => m.SignInModule) },
   { path: 'sign-up', loadChildren: () => import('./pages/sign-up/sign-up.module').then(m => m.SignUpModule) },
   
   { path: '', component: LayoutComponent, children:[
+    { path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule) },
     { path: 'administration', loadChildren: () => import('./pages/administration/administration.module').then(m => m.AdministrationModule), canActivateChild: [hasSessionGuard] },
     { path: 'store', loadChildren: () => import('./pages/store/store.module').then(m => m.StoreModule), canActivateChild: [hasSessionGuard] },
     { path: 'members', loadChildren: () => import('./pages/members/members.module').then(m => m.MembersModule), canActivateChild: [hasSessionGuard] },
     { path: 'invoicing', loadChildren: () => import('./pages/invoicing/invoicing.module').then(m => m.InvoicingModule), canActivateChild: [hasSessionGuard] },
     { path: 'reports', loadChildren: () => import('./pages/reports/reports.module').then(m => m.ReportsModule), canActivateChild: [hasSessionGuard] },
-    { path: 'not-found', loadChildren: () => import('./pages/not-found/not-found.module').then(m => m.NotFoundModule) }
   ]},
   
+  { path: 'not-found', loadChildren: () => import('./pages/not-found/not-found.module').then(m => m.NotFoundModule) },
   { path: '**', redirectTo: '/not-found', pathMatch: 'full'}
     
 ];
