@@ -14,14 +14,14 @@ import { environment } from 'src/environments/environment.development';
 })
 export class SignInComponent {
   constructor(
-    private login: AccountService,
+    private accountService: AccountService,
     private router: Router,
     private alertS: SwalAlertService,
     private cookie: CookieService
     ) {}
 
   resposeForm(formData:login){
-    this.login.SignIn(formData).subscribe((formData:ResponseModel<Model>) => {
+    this.accountService.SignIn(formData).subscribe((formData:ResponseModel<Model>) => {
       if (formData.hasError){
         this.alertS.errorAlert('Credentials error', 'Incorrect username or password, please validate your credentials')
       }

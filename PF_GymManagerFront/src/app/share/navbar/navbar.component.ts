@@ -1,5 +1,8 @@
 import { Component, ElementRef, HostListener, Input, OnInit, Renderer2  } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
+import { AccountService } from 'src/app/core/services/account.service';
+import { SwalAlertService } from 'src/app/core/services/swal-alert.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,32 +17,27 @@ export class NavbarComponent implements OnInit {
 
     constructor(
       private cookie:CookieService,
-      private renderer: Renderer2, 
-      private el: ElementRef    
-    ) {
-      this.validatorSession()
-      const currentUrl = window.location.href;
-      this.isHome = currentUrl === 'http://localhost:4200/home';
-      console.log(this.isHome)
-    }
+      private router: Router,
+      private alertS: SwalAlertService,
+      private accountService: AccountService
+    ) {}
 
     ngOnInit() {
-      
+      this.hasSession = this.accountService.validatorSession()
+      this.checkIsHome();
+
+      this.router.events.subscribe((event) => {
+        if (event instanceof NavigationEnd) {
+          this.checkIsHome();
+        }
+      });
+  
     }
     
-
-    validatorSession() {
-      const session = this.cookie.get('session');
-      let dataUser;
-      
-      if (!!session) {
-        dataUser = JSON.parse(atob(session !== undefined ? session : ''));
-      }
-      if (dataUser?.hasSession) {
-        this.hasSession=true;
-      }else{
-        this.hasSession=false;
-      }
+    checkIsHome() {
+      const currentUrl = window.location.href;
+      this.isHome = currentUrl === 'http://localhost:4200/home';
+      console.log(this.isHome);
     }
 
     @HostListener('window:scroll', [])
@@ -50,6 +48,10 @@ export class NavbarComponent implements OnInit {
       } else {
         this.isScrolled = false;
       }
+    }
+
+    signOut(){
+      this.alertS.confirmLogOutAlert();
     }
 
 }

@@ -1,7 +1,6 @@
 import { CanActivateFn, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
 import { inject } from '@angular/core';
-import { environment } from 'src/environments/environment.development';
 
 
 export const hasSessionGuard: CanActivateFn = (route, state) => {

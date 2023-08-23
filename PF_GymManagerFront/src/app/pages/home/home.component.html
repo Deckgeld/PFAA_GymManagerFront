@@ -4,12 +4,13 @@
     <div class="overlay">
         <p class="banner-title display-1"><b>El cuerpo que mereces</b></p>
         <br><br>
-        <div class="btn-center">
+        <div *ngIf="!hasSession" class="btn-center">
             <a [routerLink]="['/sign-in']" class="btn bg-yellow" style="margin-right: 30px;">Sign in</a>
             <a [routerLink]="['/sign-up']" class="btn bg-yellow">Sign up</a>
         </div>
     </div>
 </div>
+
 <div class="div1"></div>
 
 
