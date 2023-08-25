@@ -2,11 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';     
 import { catchError } from 'rxjs/operators';     
-import { Model, ResponseModel } from '../interfaces/response-models';
-import { login } from '../interfaces/account';
+import { ResponseModel } from '../interfaces/response-models';
 import { ErrorHandlerService } from './error-handler.service';
 import { environment } from 'src/environments/environment.development';
 import { CookieService } from 'ngx-cookie';
+import { JWT, loginDto } from '../interfaces/user';
 
 @Injectable({
   providedIn: 'root'
@@ -19,9 +19,9 @@ export class AccountService {
       private cookies: CookieService 
     ) { }
  
-   SignIn(request: login): Observable<ResponseModel<Model>>{
+   signIn(request: loginDto): Observable<ResponseModel<JWT>>{
     let url: string = `${environment.baseUrl}api/Account`;   
-     return this.http.post<ResponseModel<Model>>(url, request, environment.httpOptions)
+     return this.http.post<ResponseModel<JWT>>(url, request, environment.httpOptions)
      .pipe(catchError(this.errorHandler.errorHandler));;
    }
 

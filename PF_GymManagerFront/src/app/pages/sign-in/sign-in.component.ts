@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
-import { login } from 'src/app/core/interfaces/account';
-import { Model, ResponseModel } from 'src/app/core/interfaces/response-models';
+import { ResponseModel } from 'src/app/core/interfaces/response-models';
+import { JWT, loginDto } from 'src/app/core/interfaces/user';
 import { AccountService } from 'src/app/core/services/account.service';
 import { SwalAlertService } from 'src/app/core/services/swal-alert.service';
 import { environment } from 'src/environments/environment.development';
@@ -20,8 +20,8 @@ export class SignInComponent {
     private cookie: CookieService
     ) {}
 
-  resposeForm(formData:login){
-    this.accountService.SignIn(formData).subscribe((formData:ResponseModel<Model>) => {
+  resposeForm(formData:loginDto){
+    this.accountService.signIn(formData).subscribe((formData:ResponseModel<JWT>) => {
       if (formData.hasError){
         this.alertS.errorAlert('Credentials error', 'Incorrect username or password, please validate your credentials')
       }

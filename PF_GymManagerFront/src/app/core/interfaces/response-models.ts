@@ -18,11 +18,3 @@ export interface ResponseErrorModel {
     status: number;
     traceId: string;
 }
-
-
-export interface Model {
-    id: string,
-    userName: string,
-    phoneNumber: string,
-    email: string
-}

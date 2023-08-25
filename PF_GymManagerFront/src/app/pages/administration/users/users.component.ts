@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { User } from 'src/app/core/interfaces/user';
+import { userDto } from 'src/app/core/interfaces/user';
 import { UsersService } from 'src/app/core/services/users.service';
 
 @Component({
@@ -14,9 +14,10 @@ export class UsersComponent implements OnInit{
 
   displayedColumns: string[] = [
     'email',
-    'phoneNumber'
+    'phoneNumber',
+    'delete'
   ];
-  dataSource!: MatTableDataSource<User>;
+  dataSource!: MatTableDataSource<userDto>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort; 
@@ -40,5 +41,13 @@ export class UsersComponent implements OnInit{
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  deleteRow(row: userDto){
+    
+  }
+
+  openModal(row: userDto){
+    console.log(row)
   }
 }

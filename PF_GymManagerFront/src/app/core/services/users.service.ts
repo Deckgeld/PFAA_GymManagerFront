@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
-import { Model, ResponseArrayModel, ResponseModel } from '../interfaces/response-models';
-import { User } from '../interfaces/user';
+import { ResponseArrayModel } from '../interfaces/response-models';
+import { newUserDto, userDto } from '../interfaces/user';
 import { HttpClient } from '@angular/common/http';
 import { ErrorHandlerService } from './error-handler.service';
 import { Observable } from 'rxjs';     
@@ -21,13 +21,13 @@ export class UsersService {
 
   getUsers(){
     let url: string = `${environment.baseUrl}api/Users`;   
-    return this.http.get<ResponseArrayModel<User>>(url, environment.httpOptions)
+    return this.http.get<ResponseArrayModel<userDto>>(url, environment.httpOptions)
       .pipe(catchError(this.errorHandler.errorHandler));
   }
 
-  postUser(request: User): Observable<ResponseModel<Model>>{
+  newUser(request: newUserDto): Observable<ResponseArrayModel<userDto>>{
     let url: string = `${environment.baseUrl}api/Users`;   
-    return this.http.post<ResponseModel<Model>>(url, request, environment.httpOptions)
+    return this.http.post<ResponseArrayModel<userDto>>(url, request, environment.httpOptions)
     .pipe(catchError(this.errorHandler.errorHandler));;
   }
 }
