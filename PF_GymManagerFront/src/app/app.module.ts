@@ -10,13 +10,15 @@ import { LayoutComponent } from './share/layout/layout.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CookieModule } from 'ngx-cookie';
 import { RouterModule } from '@angular/router';
-import { UserEditorModalComponent } from './components/user-editor-modal/user-editor-modal.component'; 
+import { UserEditorModalComponent } from './components/user-editor-modal/user-editor-modal.component';
+import { UserEditorDialogComponent } from './components/user-editor-dialog/user-editor-dialog.component'; 
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    LayoutComponent
+    LayoutComponent,
+    UserEditorDialogComponent
   ],
   imports: [
     BrowserModule,

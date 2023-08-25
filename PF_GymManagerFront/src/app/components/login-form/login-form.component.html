@@ -1,10 +1,11 @@
 <!-- Section: Design Block -->
 <section class="text-center text-lg-start">
   <!-- Jumbotron -->
-  <div class="container py-4">
-    <div class="row g-0 align-items-center">
-      <div class="col-lg-6 mb-5 mb-lg-0">
-        <div class="card cascading-right" style="
+  <div class="container ">
+    <div [ngClass]="{'row g-0 align-items-center': !hasSession}">
+
+      <div class="" [ngClass]="{'col-lg-6 mb-5 mb-lg-0': !hasSession}">
+        <div class="card" [ngClass]="{'cascading-right': !hasSession}" style="
               background: hsla(0, 0%, 100%, 0.55);
               backdrop-filter: blur(30px);
               ">
@@ -30,13 +31,17 @@
               </mat-form-field>
               <br>
               <!-- Submit button -->
-              <button type="submit" [disabled]="formUser.invalid" mat-raised-button color="accent" class="col-md-4">{{confirmButtonText}}</button>
+              <button type="submit" mat-raised-button color="accent"
+                [ngClass]="{'col-md-4': !hasSession, 'col-md-6': hasSession}" [disabled]="formUser.invalid">
+                {{confirmButtonText}}
+              </button>
+              <button mat-raised-button class="col-md-6" *ngIf="hasSession" (click)="cancelBtn()">Cancelar</button>
             </form>
           </div>
         </div>
       </div>
 
-      <div class="col-lg-6 mb-5 mb-lg-0">
+      <div class="col-lg-6 mb-5 mb-lg-0" *ngIf="!hasSession">
         <img src="../../../assets/img/login.jpg" class="w-100 rounded-4 shadow-4" style="height: 80vh;" alt="" />
       </div>
     </div>

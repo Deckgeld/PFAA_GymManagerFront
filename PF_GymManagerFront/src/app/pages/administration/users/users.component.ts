@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { userDto } from 'src/app/core/interfaces/user';
+import { Subscription } from 'rxjs';
+import { newUserDto, userDto } from 'src/app/core/interfaces/user';
 import { UsersService } from 'src/app/core/services/users.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { UsersService } from 'src/app/core/services/users.service';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent implements OnInit{
+export class UsersComponent implements OnInit {
 
   displayedColumns: string[] = [
     'email',
@@ -18,20 +19,28 @@ export class UsersComponent implements OnInit{
     'delete'
   ];
   dataSource!: MatTableDataSource<userDto>;
-
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort; 
+  @ViewChild(MatSort) sort!: MatSort;
+
+  rowSelected: userDto | undefined;
+  newUser = false;
+  DataUsers!: Subscription;
 
   constructor(
     private userService: UsersService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this.userService.getUsers().subscribe(response => {
-      this.dataSource = new MatTableDataSource(response.model)
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    });
+    this.loadData();
+  }
+
+  loadData() {
+    this.DataUsers =
+      this.userService.getUsers().subscribe(response => {
+        this.dataSource = new MatTableDataSource(response.model)
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      });
   }
 
   applyFilter(event: Event) {
@@ -43,11 +52,25 @@ export class UsersComponent implements OnInit{
     }
   }
 
-  deleteRow(row: userDto){
-    
+  deleteRow(row: userDto) {
+
   }
 
-  openModal(row: userDto){
-    console.log(row)
+
+
+  openModalRow(row: userDto) {
+    this.rowSelected = row;
+  }
+  openModalBtn() {
+    this.newUser = true;
+  }
+  onCloseHandled(dataModal: any) {
+    this.rowSelected = undefined;
+    this.newUser = false
+
+    if (dataModal.refreshData) {
+      this.DataUsers.unsubscribe();
+      this.loadData();
+    }
   }
 }

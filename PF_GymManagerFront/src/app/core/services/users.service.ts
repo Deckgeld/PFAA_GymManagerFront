@@ -30,4 +30,10 @@ export class UsersService {
     return this.http.post<ResponseArrayModel<userDto>>(url, request, environment.httpOptions)
     .pipe(catchError(this.errorHandler.errorHandler));;
   }
+
+  updateUser(request: newUserDto, id:string): Observable<ResponseArrayModel<userDto>>{
+    let url: string = `${environment.baseUrl}api/Users/${id}`;   
+    return <any>this.http.put<ResponseArrayModel<userDto>>(url, request, environment.httpOptions)
+      .pipe(catchError(this.errorHandler.errorHandler));
+  }
 }
