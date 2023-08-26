@@ -1,9 +1,8 @@
 import { Component, EventEmitter, OnChanges, Input, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CookieService } from 'ngx-cookie';
-import { newUserDto, userDto } from 'src/app/core/interfaces/user';
+import { newUserDto } from 'src/app/core/interfaces/user';
 import { AccountService } from 'src/app/core/services/account.service';
-import { environment } from 'src/environments/environment.development';
 
 
 @Component({
@@ -15,10 +14,10 @@ export class LoginFormComponent implements OnChanges{
 
   @Input() isSingUp!: boolean;
   @Input() confirmButtonText!: string;
-  @Output() resposeForm: EventEmitter<any> = new EventEmitter()
+  @Output() emmitterSubmitForm: EventEmitter<any> = new EventEmitter()
 
   @Input() rowUserForm?:newUserDto; 
-  @Output() cancelForm: EventEmitter<boolean> = new EventEmitter();
+  @Output() emmitterCancelForm: EventEmitter<boolean> = new EventEmitter();
 
   formUser!: FormGroup;
   defaultFields = {
@@ -38,11 +37,8 @@ export class LoginFormComponent implements OnChanges{
   ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
-
-    
     const { rowUserForm } = changes;
 
-  
     this.initForm();
     this.hasSession = this.accountService.validatorSession();
 
@@ -55,15 +51,16 @@ export class LoginFormComponent implements OnChanges{
   }
 
   initForm() {
-    
     let userFields = { ...this.defaultFields }
-
     if (this.isSingUp) {
       userFields = { ...this.defaultFields, ...this.extraFields }
     }
     this.formUser = this.fb.group(
       userFields
-    )
+      )
+      if(!!this.rowUserForm){
+        this.formUser.removeControl('password');
+      }
   }
 
   onSubmitForm() {
@@ -71,9 +68,9 @@ export class LoginFormComponent implements OnChanges{
     if (!this.isSingUp) {
       request = { password: this.formUser.value.password, userName: this.formUser.value.email }
     }
-    this.resposeForm.emit(request);
+    this.emmitterSubmitForm.emit(request);
   }
   cancelBtn(){
-    this.cancelForm.emit(true);
+    this.emmitterCancelForm.emit(true);
   }
 }

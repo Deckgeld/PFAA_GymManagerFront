@@ -24,6 +24,16 @@ export class SwalAlertService {
     })
   }
 
+  successAlet(title:string){
+    return Swal.fire({
+      position: 'top',
+      icon: 'success',
+      title: title,
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
+
   confirmLogOutAlert(){
     return Swal.fire({
       title: 'Are you sure you want to log out?',

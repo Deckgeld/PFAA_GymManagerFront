@@ -10,6 +10,10 @@ export interface newUserDto {
     password: string;
     email: string;
 }
+export interface editUserDto {
+    phoneNumber: string;
+    email: string;
+}
 
 
 

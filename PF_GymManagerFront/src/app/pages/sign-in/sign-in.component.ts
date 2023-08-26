@@ -18,23 +18,23 @@ export class SignInComponent {
     private router: Router,
     private alertS: SwalAlertService,
     private cookie: CookieService
-    ) {}
+  ) { }
 
-  resposeForm(formData:loginDto){
-    this.accountService.signIn(formData).subscribe((formData:ResponseModel<JWT>) => {
-      if (formData.hasError){
+  listenerSubmitForm(formData: loginDto) {
+    this.accountService.signIn(formData).subscribe((formData: ResponseModel<JWT>) => {
+      if (formData.hasError) {
         this.alertS.errorAlert('Credentials error', 'Incorrect username or password, please validate your credentials')
       }
-      if(formData.message === 'Authorized'){
+      if (formData.message === 'Authorized') {
         console.log(formData)
-        const session = { ...formData.model, hasSession: true }    
+        const session = { ...formData.model, hasSession: true }
         let objTemp = btoa(JSON.stringify(session));
         this.cookie.put('session', objTemp)
         this.router.navigate(['/home']);
       }
-    }, (error:any) => { 
+    }, (error: any) => {
       this.alertS.errorAlert('Sorry ', 'Service not available at the moment, please contact your admin')
       console.log(error)
     });
-}
+  }
 }

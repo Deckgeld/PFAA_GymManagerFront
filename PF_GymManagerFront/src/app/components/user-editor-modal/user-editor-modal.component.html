@@ -7,8 +7,8 @@
                   [isSingUp]="true" 
                   [rowUserForm]="rowNewUserDto" 
                   [confirmButtonText]="confirmButtonText" 
-                  (resposeForm)="listenerSubmitForm($event)" 
-                  (cancelForm)="listenerCancelForm($event)"
+                  (emmitterSubmitForm)="listenerSubmitForm($event)" 
+                  (emmitterCancelForm)="listenerCancelForm($event)"
                 ></app-login-form>
             </div>
         </div>

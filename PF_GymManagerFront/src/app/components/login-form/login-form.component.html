@@ -19,7 +19,7 @@
                 <input type="email" matInput formControlName="email">
               </mat-form-field>
 
-              <mat-form-field appearance="outline" class="col-md-12 mb-2">
+              <mat-form-field appearance="outline" class="col-md-12 mb-2" *ngIf="!rowUserForm">
                 <mat-label>Enter your password</mat-label>
                 <input type="password" matInput formControlName="password">
               </mat-form-field>

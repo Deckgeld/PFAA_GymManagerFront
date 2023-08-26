@@ -5,6 +5,7 @@ import { UsersRoutingModule } from './users-routing.module';
 import { UsersComponent } from './users.component';
 import { MaterialModel } from 'src/material.module';
 import { UserEditorModalModule } from 'src/app/components/user-editor-modal/user-editor-modal.module';
+import { UserEditorDialogModule } from 'src/app/components/user-editor-dialog/user-editor-dialog.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { UserEditorModalModule } from 'src/app/components/user-editor-modal/user
     CommonModule,
     UsersRoutingModule,
     MaterialModel,
-    UserEditorModalModule
+    UserEditorModalModule,
+    UserEditorDialogModule
   ]
 })
 export class UsersModule { }

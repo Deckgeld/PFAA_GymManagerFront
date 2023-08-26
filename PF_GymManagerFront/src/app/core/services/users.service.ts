@@ -2,11 +2,10 @@ import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { ResponseArrayModel } from '../interfaces/response-models';
-import { newUserDto, userDto } from '../interfaces/user';
+import { editUserDto, newUserDto, userDto } from '../interfaces/user';
 import { HttpClient } from '@angular/common/http';
 import { ErrorHandlerService } from './error-handler.service';
 import { Observable } from 'rxjs';     
-
 
 
 @Injectable({
@@ -25,15 +24,22 @@ export class UsersService {
       .pipe(catchError(this.errorHandler.errorHandler));
   }
 
-  newUser(request: newUserDto): Observable<ResponseArrayModel<userDto>>{
+  newUser(request: newUserDto): Observable<ResponseArrayModel<any> | any>{
     let url: string = `${environment.baseUrl}api/Users`;   
-    return this.http.post<ResponseArrayModel<userDto>>(url, request, environment.httpOptions)
+    return this.http.post<ResponseArrayModel<any> | any>(url, request, environment.httpOptions)
     .pipe(catchError(this.errorHandler.errorHandler));;
   }
 
-  updateUser(request: newUserDto, id:string): Observable<ResponseArrayModel<userDto>>{
+  updateUser(request: editUserDto, id:string): Observable<ResponseArrayModel<userDto>>{
     let url: string = `${environment.baseUrl}api/Users/${id}`;   
-    return <any>this.http.put<ResponseArrayModel<userDto>>(url, request, environment.httpOptions)
+    return this.http.put<ResponseArrayModel<userDto>>(url, request, environment.httpOptions)
       .pipe(catchError(this.errorHandler.errorHandler));
   }
+
+  deleteUser(id:string): Observable<ResponseArrayModel<userDto>>{
+    let url: string = `${environment.baseUrl}api/Users/${id}`;   
+    return this.http.delete<ResponseArrayModel<userDto>>(url, environment.httpOptions)
+      .pipe(catchError(this.errorHandler.errorHandler));
+  }
+
 }

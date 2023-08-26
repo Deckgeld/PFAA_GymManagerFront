@@ -14,9 +14,9 @@ export class SignUpComponent {
   constructor(
     private userService: UsersService,
     private router: Router
-    ) {}
+  ) { }
 
-  resposeForm(formData:userDto){
+  listenerSubmitForm(formData: userDto) {
     this.userService.newUser(formData).subscribe(() => this.router.navigate(['/sign-in']));
   }
 }

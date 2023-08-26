@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import * as bootstrap from 'bootstrap';
-import { newUserDto, userDto } from 'src/app/core/interfaces/user';
+import { editUserDto, newUserDto, userDto } from 'src/app/core/interfaces/user';
 import { SwalAlertService } from 'src/app/core/services/swal-alert.service';
 import { UsersService } from 'src/app/core/services/users.service';
 
@@ -14,21 +14,21 @@ export class UserEditorModalComponent {
   @Input() rowUserEditor?: userDto;
   rowNewUserDto?: newUserDto;
 
-  @Output() closeModalEmitter: EventEmitter<Object> = new EventEmitter<Object>()
+  @Output() emitterCloseModal: EventEmitter<Object> = new EventEmitter<Object>()
   myModal!: bootstrap.Modal;
-  
+
   confirmButtonText = 'Create User';
-  
+
   constructor(
     private userService: UsersService,
     private alert: SwalAlertService
-  ) {}
+  ) { }
 
-  ngOnInit():void{
+  ngOnInit(): void {
     //obtenemos el modal user-editor.component.html y cremos uno nuevo
     this.myModal = new bootstrap.Modal(<HTMLInputElement>document.getElementById('staticBackdrop'));
     this.myModal.show()
-    if(!!this.rowUserEditor){
+    if (!!this.rowUserEditor) {
       this.confirmButtonText = 'Update User';
       this.rowNewUserDto = {
         phoneNumber: this.rowUserEditor.phoneNumber,
@@ -45,22 +45,34 @@ export class UserEditorModalComponent {
       closeModal: true,
       refreshData: refresh
     }
-    this.closeModalEmitter.emit(close);
+    this.emitterCloseModal.emit(close);
   }
 
-  listenerSubmitForm(response:userDto){
-    if(!!this.rowUserEditor && this.rowUserEditor.id){
-      this.userService.updateUser(response, this.rowUserEditor.id).subscribe((resp)=>{
-        if (!resp.hasError){
+  listenerSubmitForm(response: userDto) {
+    if (!!this.rowUserEditor && !!this.rowUserEditor.id) {
+      let editUserDto = {email: response.email, phoneNumber:response.phoneNumber}
+      this.userService.updateUser(editUserDto, this.rowUserEditor.id).subscribe((resp) => {
+        if (!resp.hasError) {
           this.closeModal(true);
+        } else {
+          this.alert.errorAlert(resp.message, 'Error')
         }
       });
-    }else{
-      this.userService.newUser(response).subscribe(console.log);
+    } else {
+      this.userService.newUser(response).subscribe(resp => {
+        if (!resp.hasError) {
+          this.closeModal(true);
+        } else {
+          this.alert.errorAlert(resp.model[0].code, 'Error');
+        }
+      }, error => {
+        this.alert.errorAlert('Sorry', 'Service not available at the moment, please contact your admin');
+        console.log(error.error)
+      });
     }
   }
   listenerCancelForm(close: boolean) {
-    if(close)
+    if (close)
       this.closeModal();
   }
 }
