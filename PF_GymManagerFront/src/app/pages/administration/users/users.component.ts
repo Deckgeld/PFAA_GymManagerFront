@@ -30,6 +30,9 @@ export class UsersComponent implements OnInit {
   newUser = false;
   usersSubscription !: Subscription;
 
+  showTable: boolean = true;
+  usersData!: userDto[];
+
   constructor(
     private userService: UsersService,
     public dialog: MatDialog,
@@ -46,6 +49,7 @@ export class UsersComponent implements OnInit {
         this.dataSource = new MatTableDataSource(response.model)
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        this.usersData = response.model;
       });
   }
 
@@ -107,4 +111,7 @@ export class UsersComponent implements OnInit {
     })
   }
 
+  chageView(){
+    this.showTable = !this.showTable;
+  }
 }

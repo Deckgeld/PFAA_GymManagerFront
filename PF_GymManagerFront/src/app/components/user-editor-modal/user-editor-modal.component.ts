@@ -26,7 +26,7 @@ export class UserEditorModalComponent {
 
   ngOnInit(): void {
     //obtenemos el modal user-editor.component.html y cremos uno nuevo
-    this.myModal = new bootstrap.Modal(<HTMLInputElement>document.getElementById('staticBackdrop'));
+    this.myModal = new bootstrap.Modal(<HTMLInputElement>document.getElementById('staticBackdrops'));
     this.myModal.show()
     if (!!this.rowUserEditor) {
       this.confirmButtonText = 'Update User';

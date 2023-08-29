@@ -1,4 +1,6 @@
 <div class="container">
+  <p class="h1">Users</p>
+
   <mat-form-field>
     <mat-label>Search</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. pepe@" #input>
@@ -7,7 +9,9 @@
   <button mat-stroked-button color="primary" class="mx-4" (click)="openModalBtn()">New User Modal</button>
   <button mat-stroked-button color="primary" class="mx-4" (click)="openDialog()">New User Dialog</button>
 
-  <div class="mat-elevation-z8">
+  <button mat-stroked-button color="primary" class="mx-4" (click)="chageView()">{{showTable? 'Go to Card View': 'Go to Table View'}}</button>
+  
+  <div class="mat-elevation-z8" *ngIf="showTable ; else showCards">
     <table mat-table [dataSource]="dataSource" matSort>
 
       <ng-container matColumnDef="email">
@@ -44,4 +48,17 @@
     [rowUserEditor]="rowSelected" 
     (emitterCloseModal)="listenerCloseModal($event)"
   ></app-user-editor-modal>
+
+
+  <ng-template #showCards>
+    <div class="row">
+      <ng-container *ngFor="let usr of usersData">
+        <app-basic-card 
+          class="col-md-3 pt-4" 
+          [UserData]="usr"
+          (emmitterDelete)="deleteRow($event)"
+        ></app-basic-card>
+      </ng-container>
+    </div>
+  </ng-template>
 </div>
