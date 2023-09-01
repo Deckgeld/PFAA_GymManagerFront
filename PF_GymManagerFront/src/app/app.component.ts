@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngxs/store';
+import { LoadUsersAction } from 'src/state/users.actions';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'PF_GymManagerFront';
+
+  constructor(private store:Store) { 
+    store.dispatch(new LoadUsersAction());
+  }
 }

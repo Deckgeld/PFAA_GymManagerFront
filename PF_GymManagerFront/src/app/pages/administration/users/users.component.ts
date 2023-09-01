@@ -3,11 +3,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Select } from '@ngxs/store';
 import { Subscription } from 'rxjs';
 import { UserEditorDialogComponent } from 'src/app/components/user-editor-dialog/user-editor-dialog.component';
 import { newUserDto, userDto } from 'src/app/core/interfaces/user';
 import { SwalAlertService } from 'src/app/core/services/swal-alert.service';
 import { UsersService } from 'src/app/core/services/users.service';
+import { UsersState } from 'src/state/users.state';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -16,7 +18,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-
+    
   displayedColumns: string[] = [
     'email',
     'phoneNumber',
@@ -25,6 +27,7 @@ export class UsersComponent implements OnInit {
   dataSource!: MatTableDataSource<userDto>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  
 
   rowSelected: userDto | undefined;
   newUser = false;

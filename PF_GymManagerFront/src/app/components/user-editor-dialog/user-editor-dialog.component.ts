@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ResponseArrayModel } from 'src/app/core/interfaces/response-models';
-import { userDto } from 'src/app/core/interfaces/user';
+import { newUserDto, userDto } from 'src/app/core/interfaces/user';
 import { SwalAlertService } from 'src/app/core/services/swal-alert.service';
 import { UsersService } from 'src/app/core/services/users.service';
 
@@ -16,7 +16,7 @@ export class UserEditorDialogComponent implements OnInit{
   
   constructor(
     public dialogRef: MatDialogRef<UserEditorDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public rowUserEditor: userDto,
+    @Inject(MAT_DIALOG_DATA) public rowUserEditor: any,
     private userService: UsersService,
     private alertS:SwalAlertService
   ) {}
@@ -35,7 +35,7 @@ export class UserEditorDialogComponent implements OnInit{
     this.dialogRef.close(close);
   }
 
-  listenerSubmitForm(response:userDto){
+  listenerSubmitForm(response: any){
     if(!!this.rowUserEditor && !!this.rowUserEditor.id){
       this.userService.updateUser(response, this.rowUserEditor.id).subscribe((resp)=>{
         if (!resp.hasError){
@@ -46,7 +46,6 @@ export class UserEditorDialogComponent implements OnInit{
         }
       });
     }else{
-      debugger;
       this.userService.newUser(response).subscribe(resp => {
         debugger;
         if (!resp.hasError) {

@@ -10,6 +10,13 @@ import { LayoutComponent } from './share/layout/layout.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CookieModule } from 'ngx-cookie';
 import { RouterModule } from '@angular/router';
+import { NgxsModule } from '@ngxs/store';
+import { UsersState } from 'src/state/users.state';
+import { environment } from 'src/environments/environment.development';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +30,12 @@ import { RouterModule } from '@angular/router';
     MaterialModel,
     HttpClientModule,
     CookieModule.withOptions(),
-    RouterModule.forRoot([])
+    RouterModule.forRoot([]),
+    NgxsModule.forRoot([UsersState], {
+      developmentMode: !environment.production
+    }),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
+    NgxsLoggerPluginModule.forRoot()
   ],
   providers: [Location],
   bootstrap: [AppComponent]

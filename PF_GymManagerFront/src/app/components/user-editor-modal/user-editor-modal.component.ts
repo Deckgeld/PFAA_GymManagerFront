@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import * as bootstrap from 'bootstrap';
 import { editUserDto, newUserDto, userDto } from 'src/app/core/interfaces/user';
 import { SwalAlertService } from 'src/app/core/services/swal-alert.service';
@@ -9,9 +9,9 @@ import { UsersService } from 'src/app/core/services/users.service';
   templateUrl: './user-editor-modal.component.html',
   styleUrls: ['./user-editor-modal.component.scss']
 })
-export class UserEditorModalComponent {
+export class UserEditorModalComponent implements OnInit {
 
-  @Input() rowUserEditor?: userDto;
+  @Input() rowUserEditor?: any;
   rowNewUserDto?: newUserDto;
 
   @Output() emitterCloseModal: EventEmitter<Object> = new EventEmitter<Object>()
@@ -48,7 +48,7 @@ export class UserEditorModalComponent {
     this.emitterCloseModal.emit(close);
   }
 
-  listenerSubmitForm(response: userDto) {
+  listenerSubmitForm(response: any) {
     if (!!this.rowUserEditor && !!this.rowUserEditor.id) {
       let editUserDto = {email: response.email, phoneNumber:response.phoneNumber}
       this.userService.updateUser(editUserDto, this.rowUserEditor.id).subscribe((resp) => {

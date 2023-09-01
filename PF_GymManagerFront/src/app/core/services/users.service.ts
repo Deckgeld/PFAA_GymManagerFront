@@ -24,7 +24,7 @@ export class UsersService {
       .pipe(catchError(this.errorHandler.errorHandler));
   }
 
-  newUser(request: newUserDto): Observable<ResponseArrayModel<any> | any>{
+  newUser(request: newUserDto): Observable<ResponseArrayModel<any | any>>{
     let url: string = `${environment.baseUrl}api/Users`;   
     return this.http.post<ResponseArrayModel<any> | any>(url, request, environment.httpOptions)
     .pipe(catchError(this.errorHandler.errorHandler));;
