@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Select } from '@ngxs/store';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { UserEditorDialogComponent } from 'src/app/components/user-editor-dialog/user-editor-dialog.component';
 import { newUserDto, userDto } from 'src/app/core/interfaces/user';
 import { SwalAlertService } from 'src/app/core/services/swal-alert.service';
@@ -27,7 +27,8 @@ export class UsersComponent implements OnInit {
   dataSource!: MatTableDataSource<userDto>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  
+
+  @Select(UsersState.getUsers) books$!: Observable<userDto[]>;
 
   rowSelected: userDto | undefined;
   newUser = false;
