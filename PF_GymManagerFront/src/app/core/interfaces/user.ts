@@ -1,4 +1,4 @@
-export interface userDto {
+export interface User {
     id: string;
     userName: string
     phoneNumber: string;
@@ -14,15 +14,5 @@ export interface newUserDto {
 export interface editUserDto {
     phoneNumber: string;
     email: string;
-}
-
-
-
-export interface loginDto {
-    userName: string;
-    password: string
-}
-export interface JWT {
-    accessToken: string;
 }
 

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CardInterface, footerType } from 'src/app/core/interfaces/card-interface';
+import { CardInterface, footerType } from 'src/app/core/interfaces/cards';
 
 @Component({
   selector: 'app-basic-card',

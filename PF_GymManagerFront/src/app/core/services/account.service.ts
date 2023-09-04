@@ -6,7 +6,7 @@ import { ResponseModel } from '../interfaces/response-models';
 import { ErrorHandlerService } from './error-handler.service';
 import { environment } from 'src/environments/environment.development';
 import { CookieService } from 'ngx-cookie';
-import { JWT, loginDto } from '../interfaces/user';
+import { JWT, loginDto } from '../interfaces/account';
 
 @Injectable({
   providedIn: 'root'

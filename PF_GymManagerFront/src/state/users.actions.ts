@@ -1,8 +1,8 @@
-import { userDto } from "src/app/core/interfaces/user";
+import { User } from "src/app/core/interfaces/user";
 
 export class AddUserAction {
   static readonly type = '[UsersState] Add item';
-  constructor(public payload: userDto) { }
+  constructor(public payload: User) { }
 }
 
 export class LoadUsersAction {
@@ -11,10 +11,10 @@ export class LoadUsersAction {
 
 export class UpdateUserAction {
   static readonly type = '[UsersState] Update item';
-  constructor(public payload: userDto) { }
+  constructor(public payload: User) { }
 }
 
 export class DeleteUserAction {
   static readonly type = '[UsersState] Delete item';
-  constructor(public payload: userDto) { }
+  constructor(public payload: User) { }
 }

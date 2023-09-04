@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import * as bootstrap from 'bootstrap';
-import { editUserDto, newUserDto, userDto } from 'src/app/core/interfaces/user';
+import { editUserDto, newUserDto } from 'src/app/core/interfaces/user';
 import { SwalAlertService } from 'src/app/core/services/swal-alert.service';
 import { UsersService } from 'src/app/core/services/users.service';
 

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { newUserDto, userDto } from 'src/app/core/interfaces/user';
+import { newUserDto } from 'src/app/core/interfaces/user';
 import { AccountService } from 'src/app/core/services/account.service';
 import { UsersService } from 'src/app/core/services/users.service';
 

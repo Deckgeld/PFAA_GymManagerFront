@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { State, Action, StateContext, Select } from '@ngxs/store';
 import { AccountService } from 'src/app/core/services/account.service';
-import { userDto } from 'src/app/core/interfaces/user';
 import { UsersService } from 'src/app/core/services/users.service';
 import { AddUserAction, LoadUsersAction } from './users.actions';
 import { ResponseArrayModel } from 'src/app/core/interfaces/response-models';
 import { tap } from 'rxjs';
+import { User } from 'src/app/core/interfaces/user';
 
 export class UsersStateModel {
-  public users!: userDto[];
+  public users!: User[];
 }
 
 const defaults = {
@@ -26,7 +26,7 @@ export class UsersState {
   constructor(private usersService:UsersService) { }
 
   @Select()
-  public static getUsers({ users }: UsersStateModel): userDto[]{
+  public static getUsers({ users }: UsersStateModel): User[]{
     return users
   }
   
@@ -39,7 +39,7 @@ export class UsersState {
   @Action(LoadUsersAction)
   loadUsers({ setState }: StateContext<UsersStateModel>): LoadUsersAction{
     return this.usersService.getUsers().pipe(
-      tap((response: ResponseArrayModel<userDto>) => {
+      tap((response: ResponseArrayModel<User>) => {
         const users = response.model;
         setState({ users });
       })

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
+import { JWT, loginDto } from 'src/app/core/interfaces/account';
 import { ResponseModel } from 'src/app/core/interfaces/response-models';
-import { JWT, loginDto } from 'src/app/core/interfaces/user';
 import { AccountService } from 'src/app/core/services/account.service';
 import { SwalAlertService } from 'src/app/core/services/swal-alert.service';
 import { environment } from 'src/environments/environment.development';

@@ -6,7 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Select } from '@ngxs/store';
 import { Observable, Subscription } from 'rxjs';
 import { UserEditorDialogComponent } from 'src/app/components/user-editor-dialog/user-editor-dialog.component';
-import { newUserDto, userDto } from 'src/app/core/interfaces/user';
+import { User } from 'src/app/core/interfaces/user';
 import { SwalAlertService } from 'src/app/core/services/swal-alert.service';
 import { UsersService } from 'src/app/core/services/users.service';
 import { UsersState } from 'src/state/users.state';
@@ -24,18 +24,18 @@ export class UsersComponent implements OnInit {
     'phoneNumber',
     'delete'
   ];
-  dataSource!: MatTableDataSource<userDto>;
+  dataSource!: MatTableDataSource<User>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  @Select(UsersState.getUsers) books$!: Observable<userDto[]>;
+  @Select(UsersState.getUsers) books$!: Observable<User[]>;
 
-  rowSelected: userDto | undefined;
+  rowSelected: User | undefined;
   newUser = false;
   usersSubscription !: Subscription;
 
   showTable: boolean = true;
-  usersData!: userDto[];
+  usersData!: User[];
 
   constructor(
     private userService: UsersService,
@@ -67,7 +67,7 @@ export class UsersComponent implements OnInit {
   }
 
 
-  openModalRow(row: userDto) {
+  openModalRow(row: User) {
     this.rowSelected = row;
   }
   openModalBtn() {
@@ -83,7 +83,7 @@ export class UsersComponent implements OnInit {
     }
   }
 
-  openDialog(row?: userDto) {
+  openDialog(row?: User) {
     const dialogRef = this.dialog.open(UserEditorDialogComponent, {
       data: row,
       disableClose: true,
