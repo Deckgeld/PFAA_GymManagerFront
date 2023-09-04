@@ -7,13 +7,6 @@
 @import "node_modules/bootstrap/scss/forms";
 
 .bg-yellow {
-    background-color: $yellow-600;
+    background-color: #eebc35;
     color: aliceblue;
-}
-
-.bg-gradient {
-    background: #CEA22F;
-    background: -moz-linear-gradient(left, #CEA22F 0%, #908723 50%, #67522B 100%);
-    background: -webkit-linear-gradient(left, #CEA22F 0%, #908723 50%, #67522B 100%);
-    background: linear-gradient(to right, #CEA22F 0%, #908723 50%, #67522B 100%);
 }

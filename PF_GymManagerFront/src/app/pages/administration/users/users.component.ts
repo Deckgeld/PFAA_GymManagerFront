@@ -28,7 +28,7 @@ export class UsersComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  @Select(UsersState.getUsers) books$!: Observable<User[]>;
+  @Select(UsersState.getUsers) users$!: Observable<User[]>;
 
   rowSelected: User | undefined;
   newUser = false;
