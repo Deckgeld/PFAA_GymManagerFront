@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { State, Action, StateContext, Select } from '@ngxs/store';
-import { AccountService } from 'src/app/core/services/account.service';
 import { UsersService } from 'src/app/core/services/users.service';
 import { AddUserAction, LoadUsersAction } from './users.actions';
 import { ResponseArrayModel } from 'src/app/core/interfaces/response-models';

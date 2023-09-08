@@ -34,8 +34,8 @@ export class EquipmentTypesService {
       .pipe(catchError(this.errorHandler.errorHandler));
   }
 
-  deleteEquipmentType(id:string): Observable<ResponseArrayModel<EquipmentType>>{
-    let url: string = `${environment.baseUrl}api/EquipmentType/${id}`;   
+  deleteEquipmentType(id:number): Observable<ResponseArrayModel<EquipmentType>>{
+    let url: string = `${environment.baseUrl}api/EquipmentTypes/${id}`;   
     return this.http.delete<ResponseArrayModel<EquipmentType>>(url, environment.httpOptions)
       .pipe(catchError(this.errorHandler.errorHandler));
   }

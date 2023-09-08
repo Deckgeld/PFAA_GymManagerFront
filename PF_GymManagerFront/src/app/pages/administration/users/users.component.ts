@@ -18,24 +18,24 @@ import Swal from 'sweetalert2';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-    
+  usersSubscription !: Subscription;
+  usersData!: User[];
+  dataSource!: MatTableDataSource<User>;
+
   displayedColumns: string[] = [
     'email',
     'phoneNumber',
     'delete'
   ];
-  dataSource!: MatTableDataSource<User>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  @Select(UsersState.getUsers) users$!: Observable<User[]>;
-
   rowSelected: User | undefined;
   newUser = false;
-  usersSubscription !: Subscription;
-
+  
   showTable: boolean = true;
-  usersData!: User[];
+  
+  @Select(UsersState.getUsers) users$!: Observable<User[]>;
 
   constructor(
     private userService: UsersService,

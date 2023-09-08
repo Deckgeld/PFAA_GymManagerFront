@@ -15,13 +15,14 @@ import { UsersState } from 'src/state/users.state';
 import { environment } from 'src/environments/environment.development';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+import { CitiesState } from 'src/state/cities.state';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    LayoutComponent
+    LayoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,7 +32,7 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
     HttpClientModule,
     CookieModule.withOptions(),
     RouterModule.forRoot([]),
-    NgxsModule.forRoot([UsersState], {
+    NgxsModule.forRoot([UsersState, CitiesState], {
       developmentMode: !environment.production
     }),
     NgxsReduxDevtoolsPluginModule.forRoot(),

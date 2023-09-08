@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ErrorHandlerService } from './error-handler.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
-import { ResponseArrayModel } from '../interfaces/response-models';
+import { ResponseArrayModel, ResponseModel } from '../interfaces/response-models';
 import { Observable, catchError } from 'rxjs';
 import { MembershipType, MembershipTypeDto } from '../interfaces/membership-types';
 
@@ -19,6 +19,11 @@ export class MembershipTypesService {
   getMembershipTypes(){
     let url: string = `${environment.baseUrl}api/MembershipTypes`;   
     return this.http.get<ResponseArrayModel<MembershipType>>(url, environment.httpOptions)
+      .pipe(catchError(this.errorHandler.errorHandler));
+  }
+  getMembershipById(id:number){
+    let url: string = `${environment.baseUrl}api/MembershipTypes/${id}`;   
+    return this.http.get<ResponseModel<MembershipType>>(url, environment.httpOptions)
       .pipe(catchError(this.errorHandler.errorHandler));
   }
 

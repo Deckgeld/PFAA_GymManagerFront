@@ -1,0 +1,90 @@
+<!-- Section: Design Block -->
+<section class="text-center text-lg-start">
+  <!-- Jumbotron -->
+  <div class="container ">
+    <div class="card cascading-right" style="
+                background: hsla(0, 0%, 100%, 0.55);
+                backdrop-filter: blur(30px);
+                ">
+      <div class="card-body p-5 shadow-5 text-center">
+        <mat-icon>font_download</mat-icon>
+        <h2 class="fw-bold mb-5">{{confirmButtonText}}</h2>
+
+        <form [formGroup]="formUser" (ngSubmit)="onSubmitForm()">
+          <mat-form-field appearance="outline" class="col-md-8 mb-2">
+            <mat-label>Enter the name</mat-label>
+            <input type="text" matInput formControlName="name">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="col-md-8 mb-2" *ngIf="confirmButtonText == 'EquipmentType'">
+            <mat-label>Enter the description</mat-label>
+            <input type="text" matInput formControlName="description">
+          </mat-form-field><br>
+
+          <ng-container *ngIf="confirmButtonText == 'MembershipType'">
+           
+            <mat-form-field floatLabel="always" class="col-md-8 mb-2">
+              <mat-label>Enter the cost</mat-label>
+              <input matInput type="number" formControlName="cost" class="example-right-align" placeholder="0">
+              <span matTextPrefix>$&nbsp;</span>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="col-md-8 mb-2">
+              <mat-label>Enter the duration in months</mat-label>
+              <input type="number" matInput formControlName="duration">
+            </mat-form-field><br>
+          </ng-container>
+
+          <ng-container *ngIf="confirmButtonText == 'Members'">
+            <mat-form-field appearance="outline" class="col-md-8 mb-2">
+              <mat-label>Enter your last name</mat-label>
+              <input type="text" matInput formControlName="lastName">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="col-md-8 mb-2">
+              <mat-label>Enter your email</mat-label>
+              <input type="email" matInput formControlName="email">
+            </mat-form-field><br>
+
+            <mat-form-field class="col-md-8 mb-2">
+              <mat-label>Enter your birthDay</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="birthDay">
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field class="col-md-8 mb-2">
+              <mat-label>City</mat-label>
+              <mat-select formControlName="cityId">
+                <ng-container *ngFor="let city of cities">
+                  <mat-option value={{city.id}}>{{city.name}}</mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field><br>
+
+            <mat-form-field class="col-md-8 mb-2">
+              <mat-label>Membership Type</mat-label>
+              <mat-select formControlName="membershipTypeId">
+                <ng-container *ngFor="let membership of memberships">
+                  <mat-option value={{membership.id}}>{{membership.name}}</mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field><br>
+            <mat-checkbox [(ngModel)]="checked" matInput formControlName="allowNewsLetter" >
+              Allow newsletter
+            </mat-checkbox><br><br>
+          </ng-container>
+
+          <!-- Submit button -->
+          <button class="col-md-4" type="submit" mat-raised-button color="accent" [disabled]="formUser.invalid">
+            {{isSingUp ? 'Create':'Update'}}
+          </button>
+          <button mat-raised-button class="col-md-4" (click)="cancelBtn()">Cancelar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+</section>
