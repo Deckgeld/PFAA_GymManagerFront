@@ -9,6 +9,7 @@ export interface CardInterface {
 export interface Header {
     title:       string;
     titleClass?: string;
+    subTitle?:   string;
 }
 
 export interface Body {

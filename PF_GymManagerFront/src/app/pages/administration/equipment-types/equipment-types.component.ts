@@ -68,7 +68,6 @@ export class EquipmentTypesComponent implements OnInit{
     this.rowSelected = undefined;
     this.newUser = false
 
-    debugger
     if (dataModal.refreshData) {
       this.usersSubscription.unsubscribe();
       this.loadData();
@@ -82,7 +81,6 @@ export class EquipmentTypesComponent implements OnInit{
     });
 
     dialogRef.afterClosed().subscribe((result: any) => {
-      debugger
       this.listenerCloseModal(result);
     });
   }
@@ -99,7 +97,6 @@ export class EquipmentTypesComponent implements OnInit{
       if (result.isConfirmed) {
         this.equipmentTypeServices.deleteEquipmentType(id).subscribe(resp => {
           if (!resp.hasError) {
-            debugger
             this.alert.successAlet('EquipmentType Delete');
             this.usersSubscription.unsubscribe();
             this.loadData();

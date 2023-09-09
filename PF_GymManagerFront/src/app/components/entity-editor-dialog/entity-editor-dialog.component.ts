@@ -83,7 +83,6 @@ export class EntityEditorDialogComponent implements OnInit{
 
     //If response is a equipmentType
     if(response instanceof Object && "description" in response){
-      debugger
       if(!!this.rowUserEditor && !!this.rowUserEditor.id){
         this.equipmentTypesService.updateEquipmentType(response, this.rowUserEditor.id).subscribe(resp => {
           if (!resp.hasError){
@@ -136,7 +135,6 @@ export class EntityEditorDialogComponent implements OnInit{
   
   
   listenerCancelForm(close: boolean) {
-    debugger
     if(close)
     this.openDialog = !close;
       this.onNoClick(false);

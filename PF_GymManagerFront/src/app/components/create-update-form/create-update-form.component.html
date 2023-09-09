@@ -10,7 +10,7 @@
         <mat-icon>font_download</mat-icon>
         <h2 class="fw-bold mb-5">{{confirmButtonText}}</h2>
 
-        <form [formGroup]="formUser" (ngSubmit)="onSubmitForm()">
+        <form [formGroup]="formUser" >
           <mat-form-field appearance="outline" class="col-md-8 mb-2">
             <mat-label>Enter the name</mat-label>
             <input type="text" matInput formControlName="name">
@@ -77,10 +77,10 @@
           </ng-container>
 
           <!-- Submit button -->
-          <button class="col-md-4" type="submit" mat-raised-button color="accent" [disabled]="formUser.invalid">
-            {{isSingUp ? 'Create':'Update'}}
+          <button class="col-md-6" type="submit" (click)="onSubmitForm()" mat-raised-button color="accent" [disabled]="formUser.invalid">
+            {{!!rowEntityForm ? 'Update':'Create'}}
           </button>
-          <button mat-raised-button class="col-md-4" (click)="cancelBtn()">Cancelar</button>
+          <button mat-raised-button class="col-md-6" (click)="cancelBtn()">Cancelar</button>
         </form>
       </div>
     </div>

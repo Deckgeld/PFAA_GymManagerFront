@@ -15,7 +15,6 @@ import { LoadCitiesAction } from 'src/state/cities.actions';
   styleUrls: ['./create-update-form.component.scss']
 })
 export class CreateUpdateFormComponent implements OnChanges {
-  @Input() isSingUp!: boolean;
   @Input() confirmButtonText!: string;
   @Output() emmitterSubmitForm: EventEmitter<any> = new EventEmitter()
 
@@ -58,7 +57,6 @@ export class CreateUpdateFormComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     const { rowEntityForm } = changes;
 
-    debugger
     this.initForm();
 
 
@@ -105,14 +103,12 @@ export class CreateUpdateFormComponent implements OnChanges {
     if(this.confirmButtonText == "Members"){
       request.birthDay = request.birthDay.toISOString();
     }if(this.confirmButtonText == "MembershipType"){
-      const dateNow = new Date().toISOString
-      request = {...request, createdOn: dateNow}
+      request = {...request, createdOn: new Date().toISOString}
     }
     this.emmitterSubmitForm.emit(request);
-
   }
+
   cancelBtn() {
-    debugger
     this.emmitterCancelForm.emit(true);
   }
 

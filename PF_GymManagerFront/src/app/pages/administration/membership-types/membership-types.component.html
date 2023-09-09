@@ -1,1 +1,13 @@
-<p>membership-types works!</p>
+<div class="container">
+    <p class="h1">Membership types</p>
+
+    <div class="row">
+        <ng-container *ngFor="let usr of usersData">
+          <app-membership-card
+            class="col-md-3 pt-4" 
+            [UserData]="usr"
+            (emmitterDelete)="deleteRow($event)">
+          </app-membership-card>
+        </ng-container>
+      </div>
+</div>

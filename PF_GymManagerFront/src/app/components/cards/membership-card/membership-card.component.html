@@ -1,20 +1,23 @@
 <ng-container [ngSwitch]="card.typeCard">
     <div>
-        <ng-container *ngSwitchCase="'basic1'">
+        <ng-container *ngSwitchCase="'membershipCard'">
             <div class="card text-center">
 
                 <div class="card-header text-truncate" *ngIf="!!card.header"
                     [ngClass]="!!card.header.titleClass ? card.header.titleClass : '' ">
-                    <strong *ngIf="!!card.header.title">{{getUsername(UserData[card.header.title])}}</strong>
+
+                    <strong *ngIf="!!card.header.title"> {{ UserData[card.header.title] }} </strong>
                 </div>
 
                 <div class="card-body">
                     <h5 class="card-title" [ngClass]="!!card.body.descClass ? card.body.descClass : ''">
-                        {{UserData[card.body.desc]}}
+                        {{card.body.title}} : 
                     </h5>
                     <p class="card-text" [ngClass]="!!card.body.descClass ? card.body.descClass : ''"
-                        *ngIf="!!card.body.subDesc">
-                        {{UserData[card.body.subDesc]}} 
+                    *ngIf="!!card.body.subDesc">
+                        <ng-container *ngFor="let membership of UserData.members">
+                            {{membership.name}}
+                        </ng-container>
                     </p>
                 </div>
 
