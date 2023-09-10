@@ -6,34 +6,21 @@
                 <div class="card-header text-truncate" *ngIf="!!card.header"
                     [ngClass]="!!card.header.titleClass ? card.header.titleClass : '' " (click)="clickEdit(UserData)">
 
-                    <strong *ngIf="!!card.header.title && UserData.hasOwnProperty(card.header.title)">
-                        {{ UserData[card.header.title] }}
-                    </strong>
-
-                    <span *ngIf="!!card.header.subTitle">
-                        - ${{ UserData[card.header.subTitle] }}
-                    </span>
-
-
+                    <strong *ngIf="!!card.header.title"> {{ UserData[card.header.title] }} </strong>
+                    <span *ngIf="!!card.header.subTitle"> - ${{ UserData[card.header.subTitle] }} </span>
                 </div>
 
                 <div class="card-body">
-                    <p *ngIf="!!card.body.desc"> Months: {{ UserData[card.body.desc] }} <mat-icon
-                            style="font-size: 16px; height: 16px; width: 16px;">calendar_today</mat-icon> </p>
-
+                    <p *ngIf="!!card.body.desc"> Months: {{ UserData[card.body.desc] }} <mat-icon style="font-size: 16px; height: 16px; width: 16px;">calendar_today</mat-icon> </p>
                     <p *ngIf="!!card.body.subDesc"> Created on: {{ getDate(UserData[card.body.subDesc]) }} </p>
-
                     <div class="text-start">
-                        <h5 class="card-title " [ngClass]="!!card.body.title? card.body.title : ''">
-                            Members :
-                        </h5>
+                        <h5 class="card-title " [ngClass]="!!card.body.title? card.body.title : ''"> Members : </h5>
                         <p class="card-text" [ngClass]="!!card.body.title ? card.body.title : ''"
                             *ngIf="!!card.body.title">
                             <ng-container *ngFor="let membership of UserData.members">
                                 {{membership.name}}
                             </ng-container>
                         </p>
-
                     </div>
                 </div>
 

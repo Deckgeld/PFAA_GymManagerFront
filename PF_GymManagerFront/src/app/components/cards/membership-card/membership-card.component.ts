@@ -25,7 +25,7 @@ export class MembershipCardComponent {
       title: 'members',
       titleClass: 'text-start',
       desc: "duration",
-      descClass: 'text-capitalize',
+      descClass: '',
       subDesc: 'createdOn',
       subDescClass: '',
     },

@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Shopping, ShoppingService } from 'src/app/core/services/shopping.service';
+import { SwalAlertService } from 'src/app/core/services/swal-alert.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-shopping',
@@ -6,5 +10,43 @@ import { Component } from '@angular/core';
   styleUrls: ['./shopping.component.scss']
 })
 export class ShoppingComponent {
+  usersSubscription !: Subscription;
+  usersData !: Shopping[];
 
+  constructor(
+    private shoppingService: ShoppingService,
+    private alert: SwalAlertService
+  ) { }
+
+  ngOnInit(): void {
+    this.loadData();
+  }
+
+  loadData() {
+    this.usersSubscription =
+      this.shoppingService.getShopping().subscribe(response => {
+        this.usersData = response;
+      });
+  }
+
+  deleteRow(id: number) {
+    Swal.fire({
+      title: "Are you sure? You won't be able to revert this",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d6dd00',
+      cancelButtonColor: '#ff5050',
+      confirmButtonText: 'Yes'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.shoppingService.deleteShopping(id).subscribe(resp => {
+          if (!!resp) {
+            this.alert.successAlet('Deleted');
+            this.usersSubscription.unsubscribe();
+            this.loadData();
+          }
+        });
+      }
+    })
+  }
 }

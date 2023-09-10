@@ -31,7 +31,6 @@ export class MembershipTypesComponent implements OnInit{
       this.membershipService.getMembershipTypes().subscribe(response => {
         this.usersData = response.model;
       });
-
   }
 
   openDialog(row?: MembershipType) {
