@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
+import { EntityEditorDialogComponent } from 'src/app/components/entity-editor-dialog/entity-editor-dialog.component';
 import { MembershipType } from 'src/app/core/interfaces/membership-types';
 import { MembershipTypesService } from 'src/app/core/services/membership-types.service';
 import { SwalAlertService } from 'src/app/core/services/swal-alert.service';
@@ -26,10 +27,29 @@ export class MembershipTypesComponent implements OnInit{
   }
 
   loadData() {
-      this.membershipService.getMembershipTypes().subscribe(console.log);
+    this.usersSubscription =
       this.membershipService.getMembershipTypes().subscribe(response => {
         this.usersData = response.model;
       });
+
+  }
+
+  openDialog(row?: MembershipType) {
+    debugger
+    const dialogRef = this.dialog.open(EntityEditorDialogComponent, {
+      data: {
+        rowEntityEditor: row,
+        type: 'MembershipType'
+      },
+      disableClose: true,
+    });
+
+    dialogRef.afterClosed().subscribe((dataModal: any) => {
+      if (dataModal.refreshData) {
+        this.usersSubscription.unsubscribe();
+        this.loadData();
+      }
+    });
   }
 
   deleteRow(id: string) {
@@ -45,6 +65,7 @@ export class MembershipTypesComponent implements OnInit{
         this.membershipService.deleteMembershipType(id).subscribe(resp => {
           if (!resp.hasError) {
             this.alert.successAlet('Delete User');
+            debugger
             this.usersSubscription.unsubscribe();
             this.loadData();
           }

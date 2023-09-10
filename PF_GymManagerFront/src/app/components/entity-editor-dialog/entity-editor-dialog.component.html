@@ -1,7 +1,7 @@
 <div mat-dialog-content>
     <app-create-update-form
-        [confirmButtonText]="'EquipmentType'" 
-        [rowEntityForm]="rowUserEditor" 
+        [confirmButtonText]="dialogData.type" 
+        [rowEntityForm]="dialogData.rowEntityEditor" 
         (emmitterSubmitForm)="listenerSubmitForm($event)" 
         (emmitterCancelForm)="listenerCancelForm($event)"
     ></app-create-update-form>

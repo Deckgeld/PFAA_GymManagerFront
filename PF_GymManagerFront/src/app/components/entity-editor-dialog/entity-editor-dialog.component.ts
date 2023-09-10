@@ -18,7 +18,7 @@ export class EntityEditorDialogComponent implements OnInit{
   
   constructor(
     public dialogRef: MatDialogRef<EntityEditorDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public rowUserEditor: any,
+    @Inject(MAT_DIALOG_DATA) public dialogData: any,
     private alertS:SwalAlertService,
     private membershipTypeService:MembershipTypesService,
     private memberService:MembersService,
@@ -26,7 +26,7 @@ export class EntityEditorDialogComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    if(!!this.rowUserEditor){
+    if(!!this.dialogData.rowEntityEditor){
       this.confirmButtonText= 'Update User';
     }
   }
@@ -57,8 +57,8 @@ export class EntityEditorDialogComponent implements OnInit{
 
       response = {...response, registeredOn: nowISOString, membershipEnd:nextMonthISOString}
       
-      if(!!this.rowUserEditor && !!this.rowUserEditor.id){
-        this.memberService.updateMember(response, this.rowUserEditor.id).subscribe(resp => {
+      if(!!this.dialogData.rowEntityEditor && !!this.dialogData.rowEntityEditor.id){
+        this.memberService.updateMember(response, this.dialogData.rowEntityEditor.id).subscribe(resp => {
           if (!resp.hasError){
             this.onNoClick(true);
           }
@@ -83,8 +83,8 @@ export class EntityEditorDialogComponent implements OnInit{
 
     //If response is a equipmentType
     if(response instanceof Object && "description" in response){
-      if(!!this.rowUserEditor && !!this.rowUserEditor.id){
-        this.equipmentTypesService.updateEquipmentType(response, this.rowUserEditor.id).subscribe(resp => {
+      if(!!this.dialogData.rowEntityEditor && !!this.dialogData.rowEntityEditor.id){
+        this.equipmentTypesService.updateEquipmentType(response, this.dialogData.rowEntityEditor.id).subscribe(resp => {
           if (!resp.hasError){
             this.onNoClick(true);
           }
@@ -108,8 +108,8 @@ export class EntityEditorDialogComponent implements OnInit{
     }
     //If response is a membershipType
     if(response instanceof Object && "cost" in response){
-      if(!!this.rowUserEditor && !!this.rowUserEditor.id){
-        this.membershipTypeService.updateMembershipType(response, this.rowUserEditor.id).subscribe(resp => {
+      if(!!this.dialogData.rowEntityEditor && !!this.dialogData.rowEntityEditor.id){
+        this.membershipTypeService.updateMembershipType(response, this.dialogData.rowEntityEditor.id).subscribe(resp => {
           if (!resp.hasError){
             this.onNoClick(true);
           }

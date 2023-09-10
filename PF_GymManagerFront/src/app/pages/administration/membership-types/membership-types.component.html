@@ -1,12 +1,16 @@
 <div class="container">
     <p class="h1">Membership types</p>
 
+    <button mat-stroked-button color="primary" class="mx-4" (click)="openDialog()">New EquipmentType</button>
+
     <div class="row">
         <ng-container *ngFor="let usr of usersData">
           <app-membership-card
             class="col-md-3 pt-4" 
             [UserData]="usr"
-            (emmitterDelete)="deleteRow($event)">
+            (emmitterDelete)="deleteRow($event)"
+            (emmitterEdit)="openDialog($event)"
+          >
           </app-membership-card>
         </ng-container>
       </div>

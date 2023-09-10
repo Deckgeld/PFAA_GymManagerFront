@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { EntityEditorDialogComponent } from 'src/app/components/entity-editor-dialog/entity-editor-dialog.component';
 import { UserEditorDialogComponent } from 'src/app/components/user-editor-dialog/user-editor-dialog.component';
 import { EquipmentType } from 'src/app/core/interfaces/equipment-types';
+import { MembershipType } from 'src/app/core/interfaces/membership-types';
 import { EquipmentTypesService } from 'src/app/core/services/equipment-types.service';
 import { SwalAlertService } from 'src/app/core/services/swal-alert.service';
 import { UsersService } from 'src/app/core/services/users.service';
@@ -64,24 +65,20 @@ export class EquipmentTypesComponent implements OnInit{
     }
   }
 
-  listenerCloseModal(dataModal: any) {
-    this.rowSelected = undefined;
-    this.newUser = false
-
-    if (dataModal.refreshData) {
-      this.usersSubscription.unsubscribe();
-      this.loadData();
-    }
-  }
-
-  openDialog(row?: EquipmentType) {
+  openDialog(row?: MembershipType) {
     const dialogRef = this.dialog.open(EntityEditorDialogComponent, {
-      data: row,
+      data: {
+        rowEntityEditor: row,
+        type: 'EquipmentType'
+      },
       disableClose: true,
     });
 
-    dialogRef.afterClosed().subscribe((result: any) => {
-      this.listenerCloseModal(result);
+    dialogRef.afterClosed().subscribe((dataModal: any) => {
+      if (dataModal.refreshData) {
+        this.usersSubscription.unsubscribe();
+        this.loadData();
+      }
     });
   }
 
