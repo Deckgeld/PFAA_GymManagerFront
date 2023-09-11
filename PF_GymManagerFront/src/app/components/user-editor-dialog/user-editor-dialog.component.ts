@@ -45,7 +45,6 @@ export class UserEditorDialogComponent implements OnInit{
       });
     }else{
       this.userService.newUser(response).subscribe(resp => {
-        debugger;
         if (!resp.hasError) {
           this.onNoClick(true);
         }else{

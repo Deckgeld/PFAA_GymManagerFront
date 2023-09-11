@@ -64,7 +64,6 @@ export class MembershipTypesComponent implements OnInit{
         this.membershipService.deleteMembershipType(id).subscribe(resp => {
           if (!resp.hasError) {
             this.alert.successAlet('Delete User');
-            debugger
             this.usersSubscription.unsubscribe();
             this.loadData();
           }
