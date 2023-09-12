@@ -4,7 +4,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
-import { Inventory, InventoryService } from 'src/app/core/services/inventory.service';
+import { EntityEditorDialogComponent } from 'src/app/components/entity-editor-dialog/entity-editor-dialog.component';
+import { Inventory } from 'src/app/core/interfaces/inventory';
+import { InventoryService } from 'src/app/core/services/inventory.service';
 import { SwalAlertService } from 'src/app/core/services/swal-alert.service';
 import Swal from 'sweetalert2';
 
@@ -57,6 +59,23 @@ export class InventoryComponent {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  openDialog(row?: Inventory) {
+    const dialogRef = this.dialog.open(EntityEditorDialogComponent, {
+      data: {
+        rowEntityEditor: row,
+        type: 'inventory',
+        isStore: 'true'
+      },
+      disableClose: true,
+    });
+    dialogRef.afterClosed().subscribe((dataModal: any) => {
+      if (dataModal.refreshData) {
+        this.usersSubscription.unsubscribe();
+        this.loadData();
+      }
+    });
   }
 
   deleteRow(id: number) {

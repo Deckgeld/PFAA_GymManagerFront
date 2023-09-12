@@ -1,0 +1,112 @@
+<!-- Section: Design Block -->
+<section class="text-center text-lg-start">
+    <!-- Jumbotron -->
+    <div class="container ">
+        <div class="card cascading-right" style="
+                  background: hsla(0, 0%, 100%, 0.55);
+                  backdrop-filter: blur(30px);
+                  ">
+            <div class="card-body p-5 shadow-5 text-center">
+                <mat-icon>font_download</mat-icon>
+                <h2 class="fw-bold mb-5">{{confirmButtonText}}</h2>
+
+                <form [formGroup]="formUser">
+
+                    <ng-container *ngIf="confirmButtonText == 'shopping'">
+                        <mat-form-field appearance="outline" class="col-md-11 mb-2">
+                            <mat-label>What is the product?</mat-label>
+                            <input type="text" matInput formControlName="product">
+                        </mat-form-field><br>
+
+                        <mat-form-field appearance="outline" class="col-md-11 mb-2">
+                            <mat-label>Enter the typeProduct</mat-label>
+                            <input type="text" matInput formControlName="typeProduct">
+                        </mat-form-field><br>
+
+                        <mat-form-field appearance="outline" class="col-md-11 mb-2">
+                            <mat-label>Who is the user?</mat-label>
+                            <input type="text" matInput formControlName="user">
+                        </mat-form-field><br>
+
+                        <mat-form-field appearance="outline" class="col-md-11 mb-2">
+                            <mat-label>Who is the member?</mat-label>
+                            <input type="text" matInput formControlName="member">
+                        </mat-form-field><br>
+                    </ng-container>
+
+                    <ng-container *ngIf="confirmButtonText == 'inventory'">
+                        <mat-form-field appearance="outline" class="col-md-11 mb-2">
+                            <mat-label>Name</mat-label>
+                            <input type="text" matInput formControlName="name">
+                        </mat-form-field><br>
+
+                        <mat-form-field appearance="outline" class="col-md-11 mb-2">
+                            <mat-label>Enter the color</mat-label>
+                            <input type="text" matInput formControlName="color">
+                        </mat-form-field><br>
+
+                        <mat-form-field appearance="outline" class="col-md-11 mb-2">
+                            <mat-label>Enter the category</mat-label>
+                            <input type="text" matInput formControlName="category">
+                        </mat-form-field><br>
+
+                        <mat-form-field appearance="outline" class="col-md-11 mb-2">
+                            <mat-label>Enter the brand</mat-label>
+                            <input type="text" matInput formControlName="brand">
+                        </mat-form-field><br>
+
+                        <mat-form-field appearance="outline" class="col-md-11 mb-2">
+                            <mat-label>Enter the quantity</mat-label>
+                            <input type="number" matInput formControlName="quantity">
+                        </mat-form-field><br>
+                    </ng-container>
+
+                    <ng-container *ngIf="confirmButtonText == 'product'">
+                        <mat-form-field appearance="outline" class="col-md-11 mb-2">
+                            <mat-label>Name</mat-label>
+                            <input type="text" matInput formControlName="name">
+                        </mat-form-field><br>
+
+                        <mat-form-field appearance="outline" class="col-md-11 mb-2">
+                            <mat-label>Enter the type</mat-label>
+                            <input type="text" matInput formControlName="type">
+                        </mat-form-field><br>
+
+                        <mat-form-field appearance="outline" class="col-md-11 mb-2">
+                            <mat-label>Enter the category</mat-label>
+                            <input type="text" matInput formControlName="category">
+                        </mat-form-field><br>
+
+                        <mat-form-field appearance="outline" class="col-md-11 mb-2">
+                            <mat-label>Enter the brand</mat-label>
+                            <input type="text" matInput formControlName="brand">
+                        </mat-form-field><br>
+
+                        <mat-form-field appearance="outline" class="col-md-11 mb-2">
+                            <mat-label>Enter the quantity</mat-label>
+                            <input type="number" matInput formControlName="quantity">
+                        </mat-form-field><br>
+
+                        <mat-form-field class="col-md-11 mb-2">
+                            <mat-label>Enter your expirationDate</mat-label>
+                            <input matInput [matDatepicker]="picker" formControlName="expirationDate">
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+
+                    </ng-container>
+
+                    <!-- Submit button -->
+                    <button class="col-md-6" type="submit" (click)="onSubmitForm()" mat-raised-button color="accent"
+                        [disabled]="formUser.invalid">
+                        {{!!rowEntityForm ? 'Update':'Create'}}
+                    </button>
+                    <button mat-raised-button class="col-md-6" (click)="cancelBtn()">Cancelar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</section>

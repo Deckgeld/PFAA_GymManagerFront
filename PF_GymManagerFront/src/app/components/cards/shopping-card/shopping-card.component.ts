@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CardInterface, footerType } from 'src/app/core/interfaces/cards';
-import { Shopping } from 'src/app/core/services/shopping.service';
+import { Shopping } from 'src/app/core/interfaces/shopping';
 
 @Component({
   selector: 'app-shopping-card',
@@ -16,14 +16,14 @@ export class ShoppingCardComponent {
     typeCard: 'shoppingCard',
     closeHeader: false,
     header: {
-      title: 'product.name',
+      title: 'product',
       titleClass: 'text-uppercase',
-      subTitle: 'product.category'
+      subTitle: 'typeProduct'
     },
     body: {
-      title: 'user.name',
+      title: 'user',
       titleClass: '',
-      desc: "member.name",
+      desc: "member",
       descClass: '',
       subDesc: 'createdOn',
       subDescClass: '',

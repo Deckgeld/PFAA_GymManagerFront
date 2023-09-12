@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { Inventory } from '../interfaces/inventory';
 
 @Injectable({
   providedIn: 'root'
@@ -35,10 +36,26 @@ export class InventoryService {
       lastUpdate: '2023-09-05',
     },
   ];  
-  empty = []
 
   getInventory(): Observable<Inventory[]>{
     return of(this.inventory);
+  }
+
+  newInventory(newInventory: Inventory): Observable<Inventory[]> {  
+    newInventory.id = this.inventory.length + 1
+    this.inventory.push(newInventory);
+    return of(this.inventory);
+  }
+
+  EditInventory(updatedProduct: Inventory, id: number): Observable<Inventory[]> {
+    const index = this.inventory.findIndex(item => item.id === id);
+    if (index !== -1) {
+      this.inventory[index] = updatedProduct;
+      return of(this.inventory);
+    }
+    else{
+      return of([])
+    }
   }
 
   deleteInventory(id: number):Observable<Inventory[]>{
@@ -48,19 +65,9 @@ export class InventoryService {
       this.inventory.splice(indice, 1);
       return of(this.inventory)
     }else{
-      return of(this.empty)
+      return of([])
     }
   }
 
   constructor() { /* empty */ }
-}
-
-export interface Inventory {
-  id: number;
-  name: string;
-  brand: string;
-  category: string;
-  color: string;
-  quantity: number;
-  lastUpdate: string;
 }

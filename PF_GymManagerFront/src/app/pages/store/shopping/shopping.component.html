@@ -1,15 +1,16 @@
 <div class="container">
     <p class="h1">Shopping</p>
 
-    <button mat-stroked-button color="primary" class="mx-4">New purchase</button>
+    <button mat-stroked-button color="primary" class="mx-4" (click)="openDialog()">New purchase</button>
 
     <div class="row">
         <ng-container *ngFor="let usr of usersData">
             <app-shopping-card
                 class="col-md-5 pt-4" 
                 [UserData]="usr"
-                (emmitterDelete)="deleteRow($event)">
-            </app-shopping-card>
+                (emmitterDelete)="deleteRow($event)"
+                (emmitterEdit)="openDialog($event)"
+            ></app-shopping-card>
         </ng-container>
       </div>
 </div>

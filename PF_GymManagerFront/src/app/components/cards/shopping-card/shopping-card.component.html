@@ -4,14 +4,14 @@
             <div class="card text-center">
 
                 <div class="card-header text-truncate" *ngIf="!!card.header" (click)="clickEdit(UserData)">
-                    <strong *ngIf="!!card.header.title" [ngClass]="!!card.header.titleClass ? card.header.titleClass : '' "> {{ UserData.product.name }} </strong>
-                    <span *ngIf="!!card.header.subTitle"> - {{ UserData.product.category }} </span>
+                    <strong *ngIf="!!card.header.title" [ngClass]="!!card.header.titleClass ? card.header.titleClass : '' "> {{ UserData[card.header.title] }} </strong>
+                    <span *ngIf="!!card.header.subTitle"> - {{ UserData[card.header.subTitle] }} </span>
                 </div>
 
                 <div class="card-body">
                     <div class="row">
-                        <p *ngIf="!!card.body.title" class="col-md-6"> User: {{ UserData.user.name }} </p>
-                        <p *ngIf="!!card.body.desc" class="col-md-6"> Member: {{ UserData.member.name }} </p>
+                        <p *ngIf="!!card.body.title" class="col-md-6"> User: {{ UserData[card.body.title] }} </p>
+                        <p *ngIf="!!card.body.desc" class="col-md-6"> Member: {{ UserData[card.body.desc] }} </p>
                     </div>
                     <p *ngIf="!!card.body.subDesc"> Created on: {{ UserData[card.body.subDesc] }} </p>
                 </div>

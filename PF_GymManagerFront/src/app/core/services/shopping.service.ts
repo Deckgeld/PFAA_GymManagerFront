@@ -1,97 +1,90 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { ProductsService } from './products.service';
+import { UsersService } from './users.service';
+import { MembersService } from './members.service';
+import { right } from '@popperjs/core';
+import { Shopping, ShoppingEdit } from '../interfaces/shopping';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShoppingService {
 
-  shopping: Shopping[] =[
+  shopping: Shopping[] = [
     {
       id: 1,
-      product: {
-        name: 'Product 1',
-        category: 'Category 1'
-      },
-      user: {
-        name: 'User 1'
-      },
-      member: {
-        name: 'Member 1'
-      },
-      createdOn: '2023-09-08'
+      createdOn: "2023-09-06",
+      product: "Protein Powder",
+      typeProduct: "Supplement",
+      user: "John Doe",
+      member: "Alice Johnson",
     },
     {
       id: 2,
-      product: {
-        name: 'Product 2',
-        category: 'Category 2'
-      },
-      user: {
-        name: 'User 2'
-      },
-      member: {
-        name: 'Member 2'
-      },
-      createdOn: '2023-09-09'
+      createdOn: "2023-09-06",
+      product: "Gym Shorts",
+      typeProduct: "Clothing",
+      user: "Jane Smith",
+      member: "Bob Williams",
     },
     {
       id: 3,
-      product: {
-        name: 'Product 3',
-        category: 'Category 3'
-      },
-      user: {
-        name: 'User 3'
-      },
-      member: {
-        name: 'Member 3'
-      },
-      createdOn: '2023-09-10'
+      createdOn: "2023-09-06",
+      product: "Yoga Mat",
+      typeProduct: "Equipment",
+      user: "Emily Davis",
+      member: "Chris Brown",
+    },
+    {
+      id: 4,
+      createdOn: "2023-09-06",
+      product: "Weightlifting Gloves",
+      user: "Michael Wilson",
+      typeProduct: "Accessories",
+      member: "Olivia Lee",
     }
   ];
-  
-  empty : Shopping[] = []
-  
 
-  getShopping(): Observable<Shopping[]>{
+  getShopping(): Observable<Shopping[]> {
     return of(this.shopping);
   }
 
-  deleteShopping(id: number):Observable<Shopping[]>{
-    const indice = this.shopping.findIndex((item) => item.id === id);
+  
+  newShopping(newShopping: Shopping): Observable<Shopping[]> {  
+    newShopping.id = this.shopping.length + 1;
+    this.shopping.push(newShopping);
+    return of(this.shopping);
+  }
 
-    if(indice !== -1) {
-      this.shopping.splice(indice, 1);
-      return of(this.shopping)
-    }else{
-      return of(this.empty)
+  EditShopping(updatedShopping: ShoppingEdit, id: number): Observable<Shopping[]> {
+    const index = this.shopping.findIndex(item => item.id === id);
+    
+    if (index !== -1) {
+      this.shopping[index].product = updatedShopping.product;
+      this.shopping[index].typeProduct = updatedShopping.typeProduct;
+      this.shopping[index].user = updatedShopping.user;
+      this.shopping[index].member = updatedShopping.member;
+      return of(this.shopping);
+    } else {
+      return of([]);
     }
   }
 
-  constructor() { /* empty */ }
-}
+  deleteShopping(id: number): Observable<Shopping[]> {
+    const indice = this.shopping.findIndex((item) => item.id === id);
 
+    if (indice !== -1) {
+      this.shopping.splice(indice, 1);
+      return of(this.shopping)
+    } else {
+      return of([])
+    }
+  }
 
-///////
-export interface Shopping {
-  id: number;
-  product: dummyProduct
-  
-  user: dummyUser
-  member: dummyMember
-  createdOn:string
+  constructor(
+    private productsService: ProductsService,
+    private usersService: UsersService,
+    private membersService: MembersService,
+  ) { /* empty */ }
 }
-
-export interface dummyUser{
-  name: string
-}
-export interface dummyMember{
-  name:string
-}
-export interface dummyProduct{
-  name:string
-  category:string
-}
-
-

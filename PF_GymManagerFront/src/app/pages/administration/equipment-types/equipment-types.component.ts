@@ -5,12 +5,10 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { EntityEditorDialogComponent } from 'src/app/components/entity-editor-dialog/entity-editor-dialog.component';
-import { UserEditorDialogComponent } from 'src/app/components/user-editor-dialog/user-editor-dialog.component';
 import { EquipmentType } from 'src/app/core/interfaces/equipment-types';
 import { MembershipType } from 'src/app/core/interfaces/membership-types';
 import { EquipmentTypesService } from 'src/app/core/services/equipment-types.service';
 import { SwalAlertService } from 'src/app/core/services/swal-alert.service';
-import { UsersService } from 'src/app/core/services/users.service';
 import Swal from 'sweetalert2';
 
 @Component({

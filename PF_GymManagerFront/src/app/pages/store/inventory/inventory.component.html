@@ -6,14 +6,14 @@
         <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
       </mat-form-field>
 
-      <!-- <button  mat-stroked-button color="primary" class="mx-4" (click)="openDialog()">New EquipmentType</button> -->
+      <button  mat-stroked-button color="primary" class="mx-4"  (click)="openDialog()">New Inventory</button>
       
       <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource" matSort>
       
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-            <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+            <td mat-cell *matCellDef="let row" (click)="openDialog(row)"> {{row.name}} </td>
           </ng-container>
       
           <ng-container matColumnDef="brand">

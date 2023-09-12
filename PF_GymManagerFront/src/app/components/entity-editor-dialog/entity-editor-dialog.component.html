@@ -1,8 +1,18 @@
 <div mat-dialog-content>
-    <app-create-update-form
+    <div *ngIf="!!dialogData.isStore; else elseBlock">
+        <app-store-form
         [confirmButtonText]="dialogData.type" 
         [rowEntityForm]="dialogData.rowEntityEditor" 
         (emmitterSubmitForm)="listenerSubmitForm($event)" 
         (emmitterCancelForm)="listenerCancelForm($event)"
-    ></app-create-update-form>
+        ></app-store-form>
+    </div>
+    <ng-template #elseBlock>
+        <app-create-update-form
+            [confirmButtonText]="dialogData.type" 
+            [rowEntityForm]="dialogData.rowEntityEditor" 
+            (emmitterSubmitForm)="listenerSubmitForm($event)" 
+            (emmitterCancelForm)="listenerCancelForm($event)"
+        ></app-create-update-form>
+    </ng-template>
 </div>

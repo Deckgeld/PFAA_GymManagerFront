@@ -2,8 +2,11 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { EquipmentType } from 'src/app/core/interfaces/equipment-types';
 import { EquipmentTypesService } from 'src/app/core/services/equipment-types.service';
+import { InventoryService } from 'src/app/core/services/inventory.service';
 import { MembersService } from 'src/app/core/services/members.service';
 import { MembershipTypesService } from 'src/app/core/services/membership-types.service';
+import { ProductsService } from 'src/app/core/services/products.service';
+import { ShoppingService } from 'src/app/core/services/shopping.service';
 import { SwalAlertService } from 'src/app/core/services/swal-alert.service';
 import { UsersService } from 'src/app/core/services/users.service';
 
@@ -22,7 +25,10 @@ export class EntityEditorDialogComponent implements OnInit{
     private alertS:SwalAlertService,
     private membershipTypeService:MembershipTypesService,
     private memberService:MembersService,
-    private equipmentTypesService:EquipmentTypesService
+    private equipmentTypesService:EquipmentTypesService,
+    private shoppingService:ShoppingService,
+    private productsService:ProductsService,
+    private inventoryService:InventoryService,
   ) {}
 
   ngOnInit(): void {
@@ -131,6 +137,84 @@ export class EntityEditorDialogComponent implements OnInit{
         });
       }
     }
+    //If response is a Shopping
+    if(response instanceof Object && "typeProduct" in response){
+      if(!!this.dialogData.rowEntityEditor && !!this.dialogData.rowEntityEditor.id){
+        this.shoppingService.EditShopping(response, this.dialogData.rowEntityEditor.id).subscribe(resp => {
+          if (!!resp){
+            this.onNoClick(true);
+          }
+          else{
+            this.alertS.errorAlert('Error', 'Update failed')
+          }
+        });
+      }
+      else{
+        this.shoppingService.newShopping(response).subscribe(resp => {
+          if (!!resp) {
+            this.onNoClick(true);
+          }else{
+            this.alertS.errorAlert('Error', "Post failed")
+          }
+        }, error =>{
+          this.alertS.errorAlert('Sorry', 'Service not available at the moment, please contact your admin');
+          console.log(error.error)
+        });
+      }
+    }
+    //If response is a Inventory
+    if(response instanceof Object && "lastUpdate" in response){
+      if(!!this.dialogData.rowEntityEditor && !!this.dialogData.rowEntityEditor.id){
+        this.inventoryService.EditInventory(response, this.dialogData.rowEntityEditor.id).subscribe(resp => {
+          if (!!resp){
+            this.onNoClick(true);
+          }
+          else{
+            this.alertS.errorAlert('Error', 'Update failed')
+          }
+        });
+      }
+      else{
+        this.inventoryService.newInventory(response).subscribe(resp => {
+          if (!!resp) {
+            this.onNoClick(true);
+          }else{
+            this.alertS.errorAlert('Error', "Post failed")
+          }
+        }, error =>{
+          this.alertS.errorAlert('Sorry', 'Service not available at the moment, please contact your admin');
+          console.log(error.error)
+        });
+      }
+    }
+    //If response is a Product
+    if(response instanceof Object && "expirationDate" in response){
+      if(!!this.dialogData.rowEntityEditor && !!this.dialogData.rowEntityEditor.id){
+        this.productsService.EditProduct(response, this.dialogData.rowEntityEditor.id).subscribe(resp => {
+          if (!!resp){
+            this.onNoClick(true);
+          }
+          else{
+            this.alertS.errorAlert('Error', 'Update failed')
+          }
+        });
+      }
+      else{
+        this.productsService.newProduct(response).subscribe(resp => {
+          if (!!resp) {
+            this.onNoClick(true);
+          }else{
+            this.alertS.errorAlert('Error', "Post failed")
+          }
+        }, error =>{
+          this.alertS.errorAlert('Sorry', 'Service not available at the moment, please contact your admin');
+          console.log(error.error)
+        });
+      }
+    }
+
+
+
   }
   
   

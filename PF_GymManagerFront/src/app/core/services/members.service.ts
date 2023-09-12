@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ErrorHandlerService } from './error-handler.service';
 import { HttpClient } from '@angular/common/http';
-import { ResponseArrayModel } from '../interfaces/response-models';
+import { ResponseArrayModel, ResponseModel } from '../interfaces/response-models';
 import { environment } from 'src/environments/environment.development';
 import { Observable, catchError } from 'rxjs';
 import { Member, MemberDto } from '../interfaces/member';
