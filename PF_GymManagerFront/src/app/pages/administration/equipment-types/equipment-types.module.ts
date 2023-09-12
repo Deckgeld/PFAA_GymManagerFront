@@ -15,7 +15,6 @@ import { EntityEditorDialogModule } from 'src/app/components/entity-editor-dialo
     CommonModule,
     EquipmentTypesRoutingModule,
     MaterialModel,
-    //UserEditorModalModule,
     EntityEditorDialogModule
   ]
 })

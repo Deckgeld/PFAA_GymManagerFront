@@ -34,7 +34,7 @@ export class MembersService {
       .pipe(catchError(this.errorHandler.errorHandler));
   }
 
-  deleteMember(id:string): Observable<ResponseArrayModel<Member>>{
+  deleteMember(id:number): Observable<ResponseArrayModel<Member>>{
     let url: string = `${environment.baseUrl}api/Members/${id}`;   
     return this.http.delete<ResponseArrayModel<Member>>(url, environment.httpOptions)
       .pipe(catchError(this.errorHandler.errorHandler));

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ErrorHandlerService } from './error-handler.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
-import { ResponseArrayModel } from '../interfaces/response-models';
+import { ResponseArrayModel, ResponseModel } from '../interfaces/response-models';
 import { Observable, catchError } from 'rxjs';
 import { City, CityDto } from '../interfaces/city';
 
@@ -19,6 +19,11 @@ export class CityService {
   getCities(){
     let url: string = `${environment.baseUrl}api/City`;   
     return this.http.get<ResponseArrayModel<City>>(url, environment.httpOptions)
+      .pipe(catchError(this.errorHandler.errorHandler));
+  }
+  getCityById(id:number){
+    let url: string = `${environment.baseUrl}api/City/${id}`;   
+    return this.http.get<ResponseModel<City>>(url, environment.httpOptions)
       .pipe(catchError(this.errorHandler.errorHandler));
   }
 

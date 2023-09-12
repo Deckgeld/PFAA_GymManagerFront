@@ -37,8 +37,7 @@ export class EquipmentTypesComponent implements OnInit{
     private equipmentTypeServices:EquipmentTypesService,
     public dialog: MatDialog,
     private alert: SwalAlertService,
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void{
     this.loadData();
@@ -63,7 +62,7 @@ export class EquipmentTypesComponent implements OnInit{
     }
   }
 
-  openDialog(row?: MembershipType) {
+  openDialog(row?: EquipmentType) {
     const dialogRef = this.dialog.open(EntityEditorDialogComponent, {
       data: {
         rowEntityEditor: row,

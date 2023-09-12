@@ -86,7 +86,6 @@ export class EntityEditorDialogComponent implements OnInit{
         });
       }      
     }
-
     //If response is a equipmentType
     if(response instanceof Object && "description" in response){
       if(!!this.dialogData.rowEntityEditor && !!this.dialogData.rowEntityEditor.id){
