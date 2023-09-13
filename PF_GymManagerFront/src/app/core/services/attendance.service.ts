@@ -29,7 +29,7 @@ export class AttendanceService {
   }
 
   newAttendance(idMember: number): Observable<ResponseArrayModel<any>>{
-    let url: string = `${environment.baseUrl}api/Attendance${idMember}`;   
+    let url: string = `${environment.baseUrl}api/Attendance/${idMember}`;   
     return this.http.post<ResponseArrayModel<Attendances | any>>(url, environment.httpOptions)
     .pipe(catchError(this.errorHandler.errorHandler));
   }

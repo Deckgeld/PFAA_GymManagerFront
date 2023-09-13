@@ -1,1 +1,82 @@
-<p>renewal-membership works!</p>
+<div class="container">
+    <p class="h1">Renewal membership</p>
+    <div>
+        <p style="color: black">Search by ID Member</p>
+    </div>
+
+    <div class="input-group col-6">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">@@</span>
+        </div>
+        <input type="number" min="1" step="1" class="form-control" placeholder="MemberId" aria-label="Username"
+            aria-describedby="basic-addon1" [(ngModel)]="memberId" id="input">
+
+
+        <button class="btn bg-yellow" type="submit" style="margin-left:20px" (click)="searchMember()">Search</button>
+    </div>
+
+    <div class="mt-3" *ngIf="!!member && !member.hasError">
+        <br>
+        <mat-card class="example-card">
+            <mat-card-header>
+                <mat-card-title>{{member.model.name}} {{member.model.lastName}}</mat-card-title>
+                <mat-card-subtitle>{{member.model.birthDay}}</mat-card-subtitle><br>
+            </mat-card-header>
+            <mat-card-content>
+                <p>Email: {{member.model.email}}</p>
+            </mat-card-content>
+        </mat-card>
+
+        <span *ngIf="daysRemaining > 0;else expired">
+            <h2>You have {{daysRemaining}} days remaining on your membership.</h2>
+        </span>
+        <ng-template #expired><span id="spanExpired">
+                <h2>Membership has expired.</h2>
+            </span></ng-template>
+        <table class="table table-borderless">
+            <tbody>
+                <tr class="add">
+                    <td>To</td>
+                    <td>From</td>
+                    <td></td>
+                </tr>
+                <tr class="content">
+                    <td class="font-weight-bold">{{member.model.registeredOn}}</td>
+                    <td class="font-weight-bold">{{member.model.membershipEnd}}</td>
+                    <td class="font-weight-bold">
+
+                        <a class="btn bg-yellow float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Member Renewal
+                        </a>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <span id="spanNotFount" *ngIf="!!member && member.hasError">Member not found</span>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" #myModal id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Choose the MembershipType</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <select class="form-select" aria-label="Default select example" #membershipSelect>
+                    <ng-container *ngFor="let membership of memberships">
+                        <option value={{membership.id}}> {{membership.name}}</option>
+                    </ng-container>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn bg-yellow" (click)="submitMembership()">Renewal</button>
+            </div>
+        </div>
+    </div>
+</div>

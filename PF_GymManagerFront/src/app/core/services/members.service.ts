@@ -22,13 +22,19 @@ export class MembersService {
       .pipe(catchError(this.errorHandler.errorHandler));
   }
 
+  getMemberById(id:number){
+    let url: string = `${environment.baseUrl}api/Members/${id}`;   
+    return this.http.get<ResponseModel<Member>>(url, environment.httpOptions)
+      .pipe(catchError(this.errorHandler.errorHandler));
+  }
+
   newMember(request: MemberDto): Observable<ResponseArrayModel<any>>{
     let url: string = `${environment.baseUrl}api/Members`;   
     return this.http.post<ResponseArrayModel<Member>>(url, request, environment.httpOptions)
     .pipe(catchError(this.errorHandler.errorHandler));;
   }
 
-  updateMember(request: MemberDto, id:string): Observable<ResponseArrayModel<Member>>{
+  updateMember(request: MemberDto, id:number): Observable<ResponseArrayModel<Member>>{
     let url: string = `${environment.baseUrl}api/Members/${id}`;   
     return this.http.put<ResponseArrayModel<Member>>(url, request, environment.httpOptions)
       .pipe(catchError(this.errorHandler.errorHandler));
