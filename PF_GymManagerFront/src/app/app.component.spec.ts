@@ -1,10 +1,23 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { NgxsModule } from '@ngxs/store';
+import { UsersState } from 'src/state/users.state';
+import { CitiesState } from 'src/state/cities.state';
+import { environment } from 'src/environments/environment.development';
+import { HttpClientModule } from '@angular/common/http';
+import { CookieModule } from 'ngx-cookie';
 
 describe('AppComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
-    imports: [RouterTestingModule],
+    imports: [
+      RouterTestingModule,
+      NgxsModule.forRoot([UsersState, CitiesState], {
+        developmentMode: !environment.production
+      }),
+      HttpClientModule,
+      CookieModule.withOptions(),
+    ],
     declarations: [AppComponent]
   }));
 
@@ -18,12 +31,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app.title).toEqual('PF_GymManagerFront');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('PF_GymManagerFront app is running!');
   });
 });

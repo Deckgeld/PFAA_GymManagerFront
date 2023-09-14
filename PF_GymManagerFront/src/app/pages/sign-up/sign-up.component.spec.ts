@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SignUpComponent } from './sign-up.component';
+import { HttpClientModule } from '@angular/common/http';
+import { CookieModule } from 'ngx-cookie';
+import { LoginFormModule } from 'src/app/components/login-form/login-form.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('SignUpComponent', () => {
   let component: SignUpComponent;
@@ -8,7 +12,13 @@ describe('SignUpComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [SignUpComponent]
+      declarations: [SignUpComponent],
+      imports: [
+        HttpClientModule,
+        CookieModule.withOptions(),
+        LoginFormModule,
+        BrowserAnimationsModule
+      ]
     });
     fixture = TestBed.createComponent(SignUpComponent);
     component = fixture.componentInstance;

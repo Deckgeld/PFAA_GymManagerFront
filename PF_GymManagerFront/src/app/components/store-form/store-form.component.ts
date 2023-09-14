@@ -41,7 +41,7 @@ export class StoreFormComponent implements OnChanges {
 
   constructor(
     private fb: FormBuilder
-  ) {  }
+  ) { this.formUser = this.fb.group({}); }
 
   ngOnChanges(changes: SimpleChanges): void {
     const { rowEntityForm } = changes;

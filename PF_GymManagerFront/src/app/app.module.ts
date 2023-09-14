@@ -8,7 +8,7 @@ import { MaterialModel } from 'src/material.module';
 import { NavbarComponent } from './share/navbar/navbar.component';
 import { LayoutComponent } from './share/layout/layout.component';
 import { HttpClientModule } from '@angular/common/http';
-import { CookieModule } from 'ngx-cookie';
+import { CookieModule, CookieService } from 'ngx-cookie';
 import { RouterModule } from '@angular/router';
 import { NgxsModule } from '@ngxs/store';
 import { UsersState } from 'src/state/users.state';
@@ -38,7 +38,7 @@ import { CitiesState } from 'src/state/cities.state';
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot()
   ],
-  providers: [Location],
+  providers: [Location, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -52,7 +52,7 @@ export class CreateUpdateFormComponent implements OnChanges {
     private store: Store,
     private cityService: CityService,
     private membershipService: MembershipTypesService
-  ) { /*store.dispatch(new LoadCitiesAction());*/ }
+  ) { this.formUser = this.fb.group(this.defaultFields); }
 
   ngOnChanges(changes: SimpleChanges): void {
     const { rowEntityForm } = changes;

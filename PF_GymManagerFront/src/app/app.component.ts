@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngxs/store';
+import { LoadCitiesAction } from 'src/state/cities.actions';
 import { LoadUsersAction } from 'src/state/users.actions';
 
 @Component({
@@ -12,5 +13,6 @@ export class AppComponent {
 
   constructor(private store:Store) { 
     store.dispatch(new LoadUsersAction());
+    store.dispatch(new LoadCitiesAction());
   }
 }

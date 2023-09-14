@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MembershipCardComponent } from './membership-card.component';
+import { MaterialModel } from 'src/material.module';
 
 describe('MembershipCardComponent', () => {
   let component: MembershipCardComponent;
@@ -8,7 +9,8 @@ describe('MembershipCardComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MembershipCardComponent]
+      declarations: [MembershipCardComponent],
+      imports: [MaterialModel],
     });
     fixture = TestBed.createComponent(MembershipCardComponent);
     component = fixture.componentInstance;

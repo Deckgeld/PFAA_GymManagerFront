@@ -33,6 +33,9 @@ export class ProductsComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort; 
 
+  rowSelected: Product | undefined;
+  newUser = false;
+
   constructor(
     private productsService:ProductsService,
     public dialog: MatDialog,

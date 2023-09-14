@@ -10,13 +10,13 @@ import { AccountService } from 'src/app/core/services/account.service';
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.scss']
 })
-export class LoginFormComponent implements OnChanges{
+export class LoginFormComponent implements OnChanges {
 
   @Input() isSingUp!: boolean;
   @Input() confirmButtonText!: string;
   @Output() emmitterSubmitForm: EventEmitter<any> = new EventEmitter()
 
-  @Input() rowUserForm?:newUserDto; 
+  @Input() rowUserForm?: newUserDto;
   @Output() emmitterCancelForm: EventEmitter<boolean> = new EventEmitter();
 
   formUser!: FormGroup;
@@ -33,8 +33,12 @@ export class LoginFormComponent implements OnChanges{
   constructor(
     private fb: FormBuilder,
     private cookie: CookieService,
-    private accountService: AccountService
-  ) { }
+    private accountService: AccountService,
+  ){
+    this.formUser = this.fb.group(this.defaultFields);
+  }
+
+
 
   ngOnChanges(changes: SimpleChanges): void {
     const { rowUserForm } = changes;
@@ -57,10 +61,10 @@ export class LoginFormComponent implements OnChanges{
     }
     this.formUser = this.fb.group(
       userFields
-      )
-      if(!!this.rowUserForm){
-        this.formUser.removeControl('password');
-      }
+    )
+    if (!!this.rowUserForm) {
+      this.formUser.removeControl('password');
+    }
   }
 
   onSubmitForm() {
@@ -70,7 +74,7 @@ export class LoginFormComponent implements OnChanges{
     }
     this.emmitterSubmitForm.emit(request);
   }
-  cancelBtn(){
+  cancelBtn() {
     this.emmitterCancelForm.emit(true);
   }
 }

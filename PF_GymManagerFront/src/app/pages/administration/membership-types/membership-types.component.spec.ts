@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MembershipTypesComponent } from './membership-types.component';
+import { HttpClientModule } from '@angular/common/http';
+import { CookieModule } from 'ngx-cookie';
+import { MaterialModel } from 'src/material.module';
 
 describe('MembershipTypesComponent', () => {
   let component: MembershipTypesComponent;
@@ -8,7 +11,12 @@ describe('MembershipTypesComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MembershipTypesComponent]
+      declarations: [MembershipTypesComponent],
+      imports: [
+        HttpClientModule,
+        CookieModule.withOptions(),
+        MaterialModel
+      ]
     });
     fixture = TestBed.createComponent(MembershipTypesComponent);
     component = fixture.componentInstance;

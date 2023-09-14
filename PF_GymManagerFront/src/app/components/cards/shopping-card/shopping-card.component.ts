@@ -8,7 +8,7 @@ import { Shopping } from 'src/app/core/interfaces/shopping';
   styleUrls: ['./shopping-card.component.scss']
 })
 export class ShoppingCardComponent {
-  @Input() UserData: any;
+  @Input() UserData!: any;
   @Output() emmitterDelete: EventEmitter<number> = new EventEmitter()
   @Output() emmitterEdit: EventEmitter<any> = new EventEmitter()
 

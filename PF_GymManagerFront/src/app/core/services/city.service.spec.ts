@@ -1,12 +1,19 @@
 import { TestBed } from '@angular/core/testing';
 
 import { CityService } from './city.service';
+import { HttpClientModule } from '@angular/common/http';
+import { CookieModule } from 'ngx-cookie';
 
 describe('CityService', () => {
   let service: CityService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [
+        HttpClientModule,
+        CookieModule.withOptions(),
+      ]
+    });
     service = TestBed.inject(CityService);
   });
 
